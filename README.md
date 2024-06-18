@@ -160,4 +160,4 @@ This is a full-featured chat application built using the MERN stack (MongoDB, Ex
 
 ## Credits
 
-Special thanks to Hitesh Chowdary for the APIHub https://api.freeapi.app/  which served as a reference for building this application.
+Special thanks to @hiteshchoudhary for the APIHub https://api.freeapi.app/  which served as a reference for building this application.
