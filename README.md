@@ -4,7 +4,7 @@
 
 ## Overview
 
-This is a full-featured chat application built using the MERN stack (MongoDB, Express.js, React, Node.js). The application supports one-to-one and group chats, and users can share images, text messages, and files( **future version would contain video call support** ). 
+This is a full-featured chat application built using the MERN stack (MongoDB, Express.js, React, Node.js). The application supports one-to-one and group chats, and users can share images, text messages, and files( **future version would contain video call support** ).
 
 ## Features
 
@@ -74,9 +74,9 @@ This is a full-featured chat application built using the MERN stack (MongoDB, Ex
    DB_MIN_POOL_SIZE=2
    DB_MAX_POOL_SIZE=5
 
-   COOKIE_VALIDITY_SEC=172800 
-   ACCESS_TOKEN_VALIDITY_SEC=182800 
-   REFRESH_TOKEN_VALIDITY_SEC=604800 
+   COOKIE_VALIDITY_SEC=172800
+   ACCESS_TOKEN_VALIDITY_SEC=182800
+   REFRESH_TOKEN_VALIDITY_SEC=604800
    TOKEN_ISSUER=api.zenchat.com
    TOKEN_AUDIENCE=zenchat.com
 
@@ -143,21 +143,27 @@ This is a full-featured chat application built using the MERN stack (MongoDB, Ex
 ## Screenshots
 
 ### Login Screen
+
 ![Login Screen](./screenshots/login_dark.png)
 
 ### Chat Interface
+
 ![Chat Interface](./screenshots/hero_light.png)
 
 ### Create a One to One Chat
+
 #### Search users to create chat with
-#### click on create chat 
-#### modal will pop create a one  to one or a group chat 
+
+#### click on create chat
+
+#### modal will pop create a one to one or a group chat
 
 ![Image1](./screenshots/searchUsers.png) ![Image2](./screenshots/createChatModal.png) ![Image3](./screenshots/createGroupChatModal2.png)
 
 ### Group Chat
+
 ![Group Chat](./screenshots/createdGroupChat.png)
 
 ## Credits
 
-Special thanks to Hitesh Chowdary for the APIHub https://api.freeapi.app/  which served as a reference for building this application.
+Special thanks to @hiteshchoudhary for the APIHub https://api.freeapi.app/ which served as a reference for building this application.
