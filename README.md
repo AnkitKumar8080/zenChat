@@ -157,7 +157,3 @@ This is a full-featured chat application built using the MERN stack (MongoDB, Ex
 
 ### Group Chat
 ![Group Chat](./screenshots/createdGroupChat.png)
-
-## Credits
-
-Special thanks to @hiteshchoudhary for the APIHub https://api.freeapi.app/  which served as a reference for building this application.
