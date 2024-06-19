@@ -6,6 +6,7 @@ import {
   BadRequestResponse,
   InternalErrorResponse,
   NotFoundResponse,
+  RateLimitResponse,
 } from "./ApiResponse";
 
 export enum ErrorType {
@@ -18,6 +19,7 @@ export enum ErrorType {
   NO_ENTRY = "NoEntryError",
   NO_DATA = "NoDataError",
   BAD_REQUEST = "BadRequestError",
+  RATE_LIMIT = "RateLimitError",
   FORBIDDEN = "ForbiddenError",
 }
 
@@ -58,6 +60,9 @@ export abstract class ApiError extends Error {
       case ErrorType.UNAUTHORIZED:
         return new AuthFailureResponse(err.message).send(res);
 
+      case ErrorType.RATE_LIMIT:
+        return new RateLimitResponse(err.message).send(res);
+
       // do not send failure message in production as it may send sensitive data
       default: {
         let message = err.message;
@@ -77,6 +82,12 @@ export class InternalError extends ApiError {
 export class BadRequestError extends ApiError {
   constructor(message: string = "Bad Request Error") {
     super(ErrorType.BAD_REQUEST, message);
+  }
+}
+
+export class RateLimitError extends ApiError {
+  constructor(message: string = "Rate Limit Error") {
+    super(ErrorType.RATE_LIMIT, message);
   }
 }
 
