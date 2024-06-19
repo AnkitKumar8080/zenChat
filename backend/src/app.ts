@@ -5,18 +5,51 @@ import authRoutes from "./routes/user.routes";
 import chatRoutes from "./routes/chat.routes";
 import messageRoutes from "./routes/message.routes";
 import "./database"; // initialize database
-import { ApiError, ErrorType, InternalError } from "./core/ApiError";
+import {
+  ApiError,
+  ErrorType,
+  InternalError,
+  RateLimitError,
+} from "./core/ApiError";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import { createServer, Server as HttpServer } from "http";
 import { Server as SocketServer } from "socket.io";
 import { initSocketIo, emitSocketEvent } from "./socket";
 import path from "path";
+import { RateLimitRequestHandler, rateLimit } from "express-rate-limit";
+import requestIp from "request-ip";
 
 const app = express();
 
 // creation of http server
 const httpServer = createServer(app);
+
+// middleware to get the ip of client from the request
+app.use(requestIp.mw());
+
+// Adding a rate limiter to the server
+const limiter: RateLimitRequestHandler = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 200, // Limit each IP to 200 requests per windowMs
+  standardHeaders: true, // Return rate limit info in the 'RateLimit-*' headers
+  legacyHeaders: false, // Disable the 'X-RateLimit-*' headers which were used before
+  keyGenerator: (req: Request, _: Response): string => {
+    return requestIp.getClientIp(req) || ""; // Return the IP address of the client
+  },
+  handler: (req: Request, res: Response, next: NextFunction, options) => {
+    next(
+      new RateLimitError(
+        `You exceeded the request limit. Allowed ${options.max} requests per ${
+          options.windowMs / 60000
+        } minute.`
+      )
+    );
+  },
+});
+
+// Apply  the rate limiter to all routes
+app.use(limiter);
 
 // express app middlewares
 app.use(express.json({ limit: "16kb" }));

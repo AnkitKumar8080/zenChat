@@ -6,6 +6,7 @@ enum StatusCode {
   FAILURE = "10001",
   RETRY = "10002",
   INVALID_ACCESS_TOKEN = "10003",
+  RATE_LIMIT = "10004",
 }
 
 // ENUM RESPONSE STATUS CODES FOR CLIENT
@@ -16,6 +17,7 @@ enum ResponseStatus {
   FORBIDDEN = 403,
   NOT_FOUND = 404,
   INTERNAL_ERROR = 500,
+  RATE_LIMIT = 429,
 }
 
 abstract class ApiResponse {
@@ -62,6 +64,12 @@ export class InternalErrorResponse extends ApiResponse {
 export class BadRequestResponse extends ApiResponse {
   constructor(message: string) {
     super(StatusCode.FAILURE, ResponseStatus.BAD_REQUEST, message);
+  }
+}
+
+export class RateLimitResponse extends ApiResponse {
+  constructor(message: string) {
+    super(StatusCode.RATE_LIMIT, ResponseStatus.RATE_LIMIT, message);
   }
 }
 
