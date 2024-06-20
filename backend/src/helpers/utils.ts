@@ -10,7 +10,7 @@ export async function filterUserData(user: User) {
 }
 
 export const getStaticFilePath = (fileName: string): string => {
-  return `http://${serverUrl}/public/images/${fileName}`;
+  return `${serverUrl}/public/images/${fileName}`;
 };
 
 export const getLocalFilePath = (fileName: string): string => {
