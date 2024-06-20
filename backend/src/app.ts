@@ -70,7 +70,7 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/messages", messageRoutes);
 
 // create a static route to serve static images
-app.use("/public", express.static(path.join(__dirname, "public")));
+app.use("/public", express.static(path.join(__dirname, "..", "public")));
 
 // creating a socket server
 const io = new SocketServer(httpServer, {
