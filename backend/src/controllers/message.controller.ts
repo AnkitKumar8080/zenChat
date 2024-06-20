@@ -116,8 +116,6 @@ export const sendMessage = asyncHandler(
       throw new InternalError("error creating message: " + message._id);
     }
 
-    console.log("updatedChat: " + updatedChat);
-
     // emit socket event to all user to receive current messsage
     updatedChat.participants.forEach((participantId: Types.ObjectId) => {
       if (participantId.toString() === currentUserId.toString()) return;

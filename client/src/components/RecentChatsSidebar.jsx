@@ -18,7 +18,6 @@ export default function RecentChatsSidebar() {
   const { user } = useAuth();
 
   const [filteredRecentUserChats, setFilteredRecentUserChats] = useState(null);
-  console.log(currentUserChats);
 
   const getFilteredRecentChats = (e) => {
     const { value } = e.target;

@@ -38,8 +38,6 @@ export abstract class ApiError extends Error {
   }
 
   public static handle(err: ApiError, res: Response): Response {
-    console.log(err.stack); // change
-
     switch (err.type) {
       case ErrorType.INTERNAL:
         return new InternalErrorResponse(err.message).send(res);

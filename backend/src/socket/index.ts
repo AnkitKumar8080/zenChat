@@ -65,7 +65,10 @@ const initSocketIo = (io: any): void => {
       socket.user = user;
       socket.join(user._id.toString());
       socket.emit(ChatEventEnum.CONNECTED_EVENT);
-      colorsUtils.log("info", "User connected. userId: " + user._id.toString());
+      colorsUtils.log(
+        "info",
+        "🤝 User connected. userId: " + user._id.toString()
+      );
 
       mountJoinChatEvent(socket);
       mountStartTypingEvent(socket);

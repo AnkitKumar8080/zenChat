@@ -103,7 +103,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         `Error Stack: ${err.stack}`
     );
     if (environment === "development") {
-      return res.status(500).send(err);
+      return res.status(500).send(err.stack);
     }
     ApiError.handle(new InternalError(), res);
   }

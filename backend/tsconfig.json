@@ -18,8 +18,9 @@
     // Import .json files
     "resolveJsonModule": true,
     "sourceMap": true,
-    "outDir": "build",
+    "outDir": "./dist",
     "baseUrl": ".",
+    "rootDir": "./src",
     "paths": {
       "*": ["node_modules/*", "src/types/*"]
     }

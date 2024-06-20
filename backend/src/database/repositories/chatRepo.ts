@@ -123,8 +123,6 @@ const getChatByChatId = (chatId: Types.ObjectId) => {
 
 // retrieve a chat by chatId
 const getChatByChatIdAggregated = (chatId: Types.ObjectId): Promise<any> => {
-  console.log("aggregating chatId : " + chatId);
-
   return ChatModel.aggregate([
     {
       $match: {
