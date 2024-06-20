@@ -17,6 +17,7 @@ COPY package*.json .
 
 RUN npm ci --only=production
 
+COPY --from=build /app/public ./public
 COPY --from=build /app/dist ./dist
 
 EXPOSE 5000

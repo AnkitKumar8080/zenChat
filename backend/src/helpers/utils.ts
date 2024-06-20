@@ -2,6 +2,7 @@ import User from "../database/model/User";
 import _ from "lodash";
 import fs from "fs";
 import colorsUtils from "./colorsUtils";
+import { serverUrl } from "../config";
 
 export async function filterUserData(user: User) {
   const data = _.pick(user, ["_id", "username", "roles", "avatarUrl"]);
@@ -9,7 +10,7 @@ export async function filterUserData(user: User) {
 }
 
 export const getStaticFilePath = (fileName: string): string => {
-  return `http://localhost:5000/public/images/${fileName}`;
+  return `http://${serverUrl}/public/images/${fileName}`;
 };
 
 export const getLocalFilePath = (fileName: string): string => {
