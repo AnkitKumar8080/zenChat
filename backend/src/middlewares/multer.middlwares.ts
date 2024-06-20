@@ -1,8 +1,9 @@
 import multer from "multer";
+import path from "path";
 // setup multer storage for storing the files
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./public/images");
+    cb(null, path.join(__dirname, "public", "images"));
   },
 
   // store the files in in it's actual format rather than binary
