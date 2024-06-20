@@ -9,12 +9,12 @@ import {
   getGroupChatDetails,
   searchAvailableusers,
 } from "../controllers/chat.controller";
-import { mongoIdPathValidator } from "../../src/validators/mongoId.validator";
-import { validate } from "../../src/validators/validate";
+import { mongoIdPathValidator } from "../validators/mongoId.validator";
+import { validate } from "..//validators/validate";
 import {
   createGroupChatValidator,
   updateGroupChatValidator,
-} from "../../src/validators/groupChat.validator";
+} from "../validators/groupChat.validator";
 const router = Router();
 
 // authentication middleware for routes

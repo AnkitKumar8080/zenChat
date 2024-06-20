@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { db } from "../config";
+import colorsUtils from "../helpers/colorsUtils";
+import seedRoles from "../seeds/seedRoles";
 
 // db con URI
 const dbURI = `${db.url}/${db.name}`;
@@ -28,7 +30,7 @@ mongoose
   })
   .connect(dbURI, options)
   .then(() => {
-    console.log("mongoose connection done");
+    colorsUtils.log("success", "🛢  mongoose connection done");
   })
   .catch((e) => {
     console.error("mongoose connection error: " + e.message);
@@ -36,11 +38,19 @@ mongoose
 
 // connection events
 mongoose.connection.on("connected", () => {
-  console.log("mongoose connection opened : " + mongoose.connection.host);
+  colorsUtils.log(
+    "success",
+    "🔗 mongoose connection opened : " + mongoose.connection.host
+  );
+});
+
+// seed the roles once db is opened
+mongoose.connection.once("open", async () => {
+  await seedRoles();
 });
 
 mongoose.connection.on("disconnected", () => {
-  console.log("mongoose connection disconnected");
+  colorsUtils.log("warning", "mongoose connection disconnected");
 });
 
 export const connection = mongoose.connection;
