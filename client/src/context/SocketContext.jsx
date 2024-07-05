@@ -35,7 +35,15 @@ const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(getSocket());
+    const socketInstance = getSocket();
+    setSocket(socketInstance);
+
+    // disconnect socket when component in unmounted
+    return () => {
+      if (socketInstance) {
+        socketInstance.disconnect();
+      }
+    };
   }, []);
 
   return (

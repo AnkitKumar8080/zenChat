@@ -6,17 +6,20 @@ import { useAuth } from "../context/AuthContext";
 import { useSocket } from "../context/SocketContext";
 import { AddChat } from "../components/AddChat";
 import { useChat } from "../context/ChatContext";
+import VideoChat from "../components/VideoChat";
+import { useConnectWebRtc } from "../context/WebRtcContext";
 
 export default function Chat() {
   const { user } = useAuth();
   const { socket } = useSocket();
   const { currentSelectedChat, activeLeftSidebar, setActiveLeftSidebar } =
     useChat();
+  const { showVideoComp } = useConnectWebRtc();
 
   return (
-    <>
+    <div className="h-screen w-full">
       <AddChat open={true} />
-
+      <VideoChat show={showVideoComp} />
       <div className="w-full  h-screen flex dark:bg-backgroundDark3">
         <div className="h-full">
           <SideMenu
@@ -37,6 +40,6 @@ export default function Chat() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

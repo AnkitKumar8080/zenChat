@@ -8,6 +8,7 @@ import { SocketProvider } from "./context/SocketContext";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import DesktopOnly from "./components/DesktopOnly";
+import WebRtcContextProvider from "./context/WebRtcContext";
 
 function App() {
   const { token, user } = useAuth();
@@ -52,7 +53,9 @@ function App() {
               <PrivateRoute>
                 <SocketProvider>
                   <ChatProvider>
-                    <Chat />
+                    <WebRtcContextProvider>
+                      <Chat />
+                    </WebRtcContextProvider>
                   </ChatProvider>
                 </SocketProvider>
               </PrivateRoute>
