@@ -162,19 +162,16 @@ export const ChatProvider = ({ children }) => {
 
   // handle on message received event from server
   // ie when a new message is sent to the server and the server sends a event to participants of chat with current message
-  const onMessageReceived = useCallback(
-    (message) => {
-      // add the unread message count here
-      // update the messages array when a new message event received from the server
-      // if (currentSelectedChat.current?._id === message.chat) {
-      //   console.log(message);
-      setMessages((prevMsgs) => [...prevMsgs, message]);
-      // }
-      // update the last message of the current chat
-      updateLastMessageOfCurrentChat(message.chat, message);
-    },
-    [messages, currentUserChats]
-  );
+  // const onMessageReceived = useCallback(message) => {
+  const onMessageReceived = (message) => {
+    // add the unread message count here
+    // update the messages array when a new message event received from the server
+    setMessages((prevMsgs) => [...prevMsgs, message]);
+    // update the last message of the current chat
+    updateLastMessageOfCurrentChat(message.chat, message);
+  };
+  // ,
+  // [messages, currentUserChats]
 
   // handle when a message is deleted
   const onMessageDeleted = useCallback(
