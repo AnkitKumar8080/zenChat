@@ -1,5 +1,11 @@
 import React from "react";
-import { BsMicMuteFill, FaVideo, MdCallEnd } from "../assets";
+import {
+  FaVideoSlash,
+  BsMicMuteFill,
+  FaMicrophone,
+  FaVideo,
+  MdCallEnd,
+} from "../assets";
 import { useConnectWebRtc } from "../context/WebRtcContext";
 
 export default function VideoChat({ show }) {
@@ -10,6 +16,8 @@ export default function VideoChat({ show }) {
     callConnectionState,
     handleToggleCamera,
     handleToggleMicrophone,
+    isCameraActive,
+    isMicrophoneActive,
   } = useConnectWebRtc();
 
   return (
@@ -36,13 +44,13 @@ export default function VideoChat({ show }) {
             onClick={handleToggleMicrophone}
             className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
           >
-            <BsMicMuteFill />
+            {isMicrophoneActive ? <FaMicrophone /> : <BsMicMuteFill />}
           </button>
           <button
             onClick={handleToggleCamera}
             className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
           >
-            <FaVideo />
+            {isCameraActive ? <FaVideo /> : <FaVideoSlash />}
           </button>
           <button
             onClick={handleHangup}

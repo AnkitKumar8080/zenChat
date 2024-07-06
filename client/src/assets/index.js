@@ -20,7 +20,9 @@ import { FiImage } from "react-icons/fi";
 import { IoMdSend } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { BsMicMuteFill } from "react-icons/bs";
+import { FaMicrophone } from "react-icons/fa";
 import { FaVideo } from "react-icons/fa";
+import { FaVideoSlash } from "react-icons/fa";
 import { MdCallEnd } from "react-icons/md";
 
 import logo from "./svgs/logo.svg";
@@ -59,4 +61,6 @@ export {
   BsMicMuteFill,
   FaVideo,
   MdCallEnd,
+  FaMicrophone,
+  FaVideoSlash,
 };

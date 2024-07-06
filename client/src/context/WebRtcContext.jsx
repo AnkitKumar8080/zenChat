@@ -305,6 +305,8 @@ export default function WebRtcContextProvider({ children }) {
         showVideoComp,
         handleToggleMicrophone,
         handleToggleCamera,
+        isMicrophoneActive,
+        isCameraActive,
       }}
     >
       {children}
