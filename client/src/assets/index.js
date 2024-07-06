@@ -19,6 +19,9 @@ import { IoMdAttach } from "react-icons/io";
 import { FiImage } from "react-icons/fi";
 import { IoMdSend } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
+import { BsMicMuteFill } from "react-icons/bs";
+import { FaVideo } from "react-icons/fa";
+import { MdCallEnd } from "react-icons/md";
 
 import logo from "./svgs/logo.svg";
 import profile from "./images/profile.png";
@@ -53,4 +56,7 @@ export {
   FiImage,
   IoMdSend,
   RxCross2,
+  BsMicMuteFill,
+  FaVideo,
+  MdCallEnd,
 };

@@ -18,6 +18,7 @@ import moment from "moment";
 import Loading from "./Loading";
 import { getOpponentParticipant } from "../utils";
 import OutsideClickHandler from "react-outside-click-handler";
+import { useConnectWebRtc } from "../context/WebRtcContext";
 
 const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
   const { deleteChatMessage } = useChat();
@@ -130,6 +131,16 @@ export default function ChatsSection() {
     scrollToBottomRef.current?.scrollIntoView();
   };
 
+  const { handleCall, targetUserId, setTargetUserId } = useConnectWebRtc();
+
+  const handleCallButtonClick = async () => {
+    setTargetUserId(opponentParticipant._id);
+  };
+
+  useEffect(() => {
+    handleCall();
+  }, [targetUserId]);
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -188,9 +199,12 @@ export default function ChatsSection() {
           {/* <div className="cursor-pointer">
             <IoCallOutline />
           </div>
+        */}
           <div className="cursor-pointer">
-            <IoVideocamOutline />
-          </div> */}
+            {!currentSelectedChat.current?.isGroupChat && (
+              <IoVideocamOutline onClick={handleCallButtonClick} />
+            )}
+          </div>
           <div className="cursor-pointer text-red-500">
             {currentSelectedChat.current?.admin.toString() === user._id ? (
               <MdDeleteOutline

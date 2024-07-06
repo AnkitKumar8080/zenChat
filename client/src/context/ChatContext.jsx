@@ -166,7 +166,10 @@ export const ChatProvider = ({ children }) => {
     (message) => {
       // add the unread message count here
       // update the messages array when a new message event received from the server
-      setMessages((prevMsgs) => [...prevMsgs, message]);
+      if (currentSelectedChat.current._id === message.chat) {
+        console.log(message);
+        setMessages((prevMsgs) => [...prevMsgs, message]);
+      }
       // update the last message of the current chat
       updateLastMessageOfCurrentChat(message.chat, message);
     },
