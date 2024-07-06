@@ -7,8 +7,7 @@ const webRtcContext = createContext(null);
 
 // connect to the signalling socket server
 const connectToSigServer = (userId) => {
-  // return socketio("https://signallingserver.bytebreeze.xyz/", {
-  return socketio("http://localhost:8180", {
+  return socketio(import.meta.env.VITE_SIGNALLING_SERVER_URL, {
     secure: true,
     rejectUnauthorized: false, // this will allow the use of self-signed certificates
     auth: { userId },
