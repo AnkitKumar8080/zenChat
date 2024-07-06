@@ -3,8 +3,14 @@ import { BsMicMuteFill, FaVideo, MdCallEnd } from "../assets";
 import { useConnectWebRtc } from "../context/WebRtcContext";
 
 export default function VideoChat({ show }) {
-  const { localVideoRef, remoteVideoRef, handleHangup, callConnectionState } =
-    useConnectWebRtc();
+  const {
+    localVideoRef,
+    remoteVideoRef,
+    handleHangup,
+    callConnectionState,
+    handleToggleCamera,
+    handleToggleMicrophone,
+  } = useConnectWebRtc();
 
   return (
     <div
@@ -26,10 +32,16 @@ export default function VideoChat({ show }) {
         ></video>
 
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-4">
-          <button className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50">
+          <button
+            onClick={handleToggleMicrophone}
+            className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
+          >
             <BsMicMuteFill />
           </button>
-          <button className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50">
+          <button
+            onClick={handleToggleCamera}
+            className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
+          >
             <FaVideo />
           </button>
           <button

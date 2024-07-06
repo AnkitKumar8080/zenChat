@@ -26,6 +26,9 @@ export default function WebRtcContextProvider({ children }) {
   const [callConnectionState, setCallConnectionState] = useState(null); // "initiated", "connecting", "connected"
   const [showVideoComp, setShowVideoComp] = useState(false);
 
+  const [isMicrophoneActive, setIsMicrophoneActive] = useState(true);
+  const [isCameraActive, setIsCameraActive] = useState(true);
+
   // refs for webRtcContext
   const didIOffer = useRef(false); // current offer made by
   const cameraFace = useRef("user"); // ref for camera face two options ("user", "environment")
@@ -265,6 +268,28 @@ export default function WebRtcContextProvider({ children }) {
     };
   }, [socket]);
 
+  // function to handle toggle microphone
+  const handleToggleMicrophone = () => {
+    if (localStreamRef.current) {
+      const audioTracks = localStreamRef.current.getAudioTracks();
+      audioTracks.forEach((track) => {
+        track.enabled = !isMicrophoneActive;
+      });
+      setIsMicrophoneActive((prev) => !prev);
+    }
+  };
+
+  // function to handle toggle camera
+  const handleToggleCamera = () => {
+    if (localStreamRef.current) {
+      const videoTracks = localStreamRef.current.getVideoTracks();
+      videoTracks.forEach((track) => {
+        track.enabled = !isCameraActive;
+      });
+      setIsCameraActive((prev) => !prev);
+    }
+  };
+
   return (
     <webRtcContext.Provider
       value={{
@@ -278,6 +303,8 @@ export default function WebRtcContextProvider({ children }) {
         handleAnswerOffer,
         incomingOffer,
         showVideoComp,
+        handleToggleMicrophone,
+        handleToggleCamera,
       }}
     >
       {children}
