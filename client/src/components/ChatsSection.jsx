@@ -131,15 +131,12 @@ export default function ChatsSection() {
     scrollToBottomRef.current?.scrollIntoView();
   };
 
-  const { handleCall, targetUserId, setTargetUserId } = useConnectWebRtc();
+  const { handleCall, setTargetUserId } = useConnectWebRtc();
 
   const handleCallButtonClick = async () => {
-    setTargetUserId(opponentParticipant._id);
-  };
-
-  useEffect(() => {
+    setTargetUserId(opponentParticipant?._id);
     handleCall();
-  }, [targetUserId]);
+  };
 
   useEffect(() => {
     scrollToBottom();

@@ -13,7 +13,8 @@ import WebRtcContextProvider from "./context/WebRtcContext";
 function App() {
   const { token, user } = useAuth();
 
-  const isDesktop = window.innerWidth > 768;
+  // const isDesktop = window.innerWidth > 768;
+  const isDesktop = window.innerWidth > 7;
   return (
     <div className="App">
       {isDesktop ? (
