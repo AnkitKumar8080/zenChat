@@ -29,6 +29,8 @@ import logo from "./svgs/logo.svg";
 import profile from "./images/profile.png";
 import profile2 from "./images/tempProfImg.avif";
 
+import ringtone from "./audio/ringtone.mp3";
+
 export {
   BsFillChatRightTextFill,
   FaLock,
@@ -63,4 +65,5 @@ export {
   MdCallEnd,
   FaMicrophone,
   FaVideoSlash,
+  ringtone,
 };

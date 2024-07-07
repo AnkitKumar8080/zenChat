@@ -8,17 +8,26 @@ import { AddChat } from "../components/AddChat";
 import { useChat } from "../context/ChatContext";
 import VideoChat from "../components/VideoChat";
 import { useConnectWebRtc } from "../context/WebRtcContext";
+import IncomingCall from "../components/IncomingCall";
 
 export default function Chat() {
   const { user } = useAuth();
   const { socket } = useSocket();
-  const { currentSelectedChat, activeLeftSidebar, setActiveLeftSidebar } =
-    useChat();
-  const { showVideoComp } = useConnectWebRtc();
+  const {
+    currentSelectedChat,
+    currentUserChats,
+    activeLeftSidebar,
+    setActiveLeftSidebar,
+  } = useChat();
+  const { showVideoComp, incomingOffer } = useConnectWebRtc();
 
   return (
     <div className="h-screen w-full">
       <AddChat open={true} />
+      {!!incomingOffer && (
+        <IncomingCall incomingOffer={incomingOffer} active={!!incomingOffer} />
+      )}
+
       <VideoChat show={showVideoComp} />
       <div className="w-full  h-screen flex dark:bg-backgroundDark3">
         <div className="h-full">

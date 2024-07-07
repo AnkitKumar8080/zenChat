@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { createContext, useContext } from "react";
 import socketio from "socket.io-client";
 import { useAuth } from "./AuthContext";
+import { ringtone } from "../assets";
 
 const webRtcContext = createContext(null);
 
@@ -37,6 +38,7 @@ export default function WebRtcContextProvider({ children }) {
   const localStreamRef = useRef(); // holds the local stream of current user
   const remoteStreamRef = useRef(new MediaStream()); // holds the remote stream comming from other peer
   const peerConnectionRef = useRef(); // holds RTCPeerConnection instance
+  const audioRef = useRef(); // reference to the incoming audio ringtone
 
   const { user } = useAuth();
   const userId = user._id;
@@ -195,10 +197,12 @@ export default function WebRtcContextProvider({ children }) {
 
     setShowVideoComp(false);
     setIncomingOffer(null);
+    audioRef.current.pause();
   };
 
   // handle answer offer
   const handleAnswerOffer = async (offerObj) => {
+    audioRef.current.pause();
     await fetchUserMedia();
     await createPeerConnection(offerObj);
 
@@ -231,6 +235,7 @@ export default function WebRtcContextProvider({ children }) {
   // handle the  incoming offers from other peers through singnalling server
   const handleIncomingOffer = async (offer) => {
     setIncomingOffer(offer);
+    audioRef.current.play();
   };
 
   const HandleHangupCallReq = (confirmation) => {
@@ -307,8 +312,10 @@ export default function WebRtcContextProvider({ children }) {
         handleToggleCamera,
         isMicrophoneActive,
         isCameraActive,
+        audioRef,
       }}
     >
+      <audio ref={audioRef} src={ringtone} loop></audio>
       {children}
     </webRtcContext.Provider>
   );
