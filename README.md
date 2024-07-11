@@ -4,7 +4,7 @@
 
 ## Overview
 
-This is a full-featured chat application built using the MERN stack (MongoDB, Express.js, React, Node.js). The application supports one-to-one and group chats, and users can share images, text messages, and files( **future version would contain video call support** ).
+This is a full-featured chat and video call application built using the MERN stack (MongoDB, Express.js, React, Node.js). The application supports one-to-one and group chats, and users can share images, text messages, and files. Also Supports one-to-one video chat.
 
 ## Features
 

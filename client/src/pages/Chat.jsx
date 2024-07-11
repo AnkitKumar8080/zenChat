@@ -11,14 +11,8 @@ import { useConnectWebRtc } from "../context/WebRtcContext";
 import IncomingCall from "../components/IncomingCall";
 
 export default function Chat() {
-  const { user } = useAuth();
-  const { socket } = useSocket();
-  const {
-    currentSelectedChat,
-    currentUserChats,
-    activeLeftSidebar,
-    setActiveLeftSidebar,
-  } = useChat();
+  const { currentSelectedChat, activeLeftSidebar, setActiveLeftSidebar } =
+    useChat();
   const { showVideoComp, incomingOffer } = useConnectWebRtc();
 
   return (

@@ -1,0 +1,157 @@
+Date : 2024-07-08 11:35:20
+Directory : /home/ankit/Projects/zenChat
+Total : 87 files,  13962 codes, 392 comments, 794 blanks, all 15148 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          5 |      9,360 |          0 |          5 |      9,365 |
+| JavaScript JSX     |         27 |      2,077 |        150 |        242 |      2,469 |
+| TypeScript         |         36 |      1,984 |        157 |        384 |      2,525 |
+| JavaScript         |          7 |        265 |         29 |         42 |        336 |
+| Markdown           |          2 |        113 |          0 |         62 |        175 |
+| CSS                |          1 |         52 |          5 |         13 |         70 |
+| YAML               |          1 |         32 |          0 |          5 |         37 |
+| Docker             |          2 |         24 |          3 |         30 |         57 |
+| JSON with Comments |          1 |         24 |         24 |          2 |         50 |
+| Properties         |          1 |         14 |         24 |          8 |         46 |
+| HTML               |          1 |         13 |          0 |          1 |         14 |
+| Ignore             |          1 |          2 |          0 |          0 |          2 |
+| XML                |          2 |          2 |          0 |          0 |          2 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                             |         87 |     13,962 |        392 |        794 |     15,148 |
+| . (Files)                                                                     |          2 |        140 |          0 |         63 |        203 |
+| backend                                                                       |         41 |      5,415 |        182 |        399 |      5,996 |
+| backend (Files)                                                               |          5 |      3,431 |         25 |         15 |      3,471 |
+| backend/src                                                                   |         36 |      1,984 |        157 |        384 |      2,525 |
+| backend/src (Files)                                                           |          3 |        110 |         12 |         24 |        146 |
+| backend/src/constants                                                         |          1 |         13 |          0 |          1 |         14 |
+| backend/src/controllers                                                       |          4 |        524 |         64 |        134 |        722 |
+| backend/src/controllers (Files)                                               |          3 |        474 |         64 |        123 |        661 |
+| backend/src/controllers/auth                                                  |          1 |         50 |          0 |         11 |         61 |
+| backend/src/core                                                              |          3 |        279 |         10 |         48 |        337 |
+| backend/src/database                                                          |          8 |        637 |         44 |         90 |        771 |
+| backend/src/database (Files)                                                  |          1 |         42 |          5 |         10 |         57 |
+| backend/src/database/model                                                    |          4 |        202 |          7 |         41 |        250 |
+| backend/src/database/repositories                                             |          3 |        393 |         32 |         39 |        464 |
+| backend/src/helpers                                                           |          3 |         64 |          4 |         13 |         81 |
+| backend/src/middlewares                                                       |          2 |         70 |          3 |         12 |         85 |
+| backend/src/routes                                                            |          3 |         74 |          8 |         20 |        102 |
+| backend/src/seeds                                                             |          1 |         24 |          0 |          4 |         28 |
+| backend/src/socket                                                            |          1 |         79 |          9 |         15 |        103 |
+| backend/src/types                                                             |          2 |          6 |          0 |          3 |          9 |
+| backend/src/validators                                                        |          5 |        104 |          3 |         20 |        127 |
+| client                                                                        |         44 |      8,407 |        210 |        332 |      8,949 |
+| client (Files)                                                                |         11 |      6,071 |         28 |         42 |      6,141 |
+| client/public                                                                 |          1 |          1 |          0 |          0 |          1 |
+| client/src                                                                    |         32 |      2,335 |        182 |        290 |      2,807 |
+| client/src (Files)                                                            |          3 |        140 |          6 |         20 |        166 |
+| client/src/api                                                                |          1 |         62 |         11 |         17 |         90 |
+| client/src/assets                                                             |          2 |         66 |          1 |          4 |         71 |
+| client/src/assets (Files)                                                     |          1 |         65 |          1 |          4 |         70 |
+| client/src/assets/svgs                                                        |          1 |          1 |          0 |          0 |          1 |
+| client/src/components                                                         |         16 |      1,175 |         48 |        102 |      1,325 |
+| client/src/context                                                            |          6 |        596 |         97 |        108 |        801 |
+| client/src/pages                                                              |          3 |        218 |          4 |         25 |        247 |
+| client/src/utils                                                              |          1 |         78 |         15 |         14 |        107 |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                      | language           | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /home/ankit/Projects/zenChat/README.md                                        | Markdown           |        108 |          0 |         58 |        166 |
+| /home/ankit/Projects/zenChat/backend/.dockerignore                            | Ignore             |          2 |          0 |          0 |          2 |
+| /home/ankit/Projects/zenChat/backend/Dockerfile                               | Docker             |         13 |          1 |         11 |         25 |
+| /home/ankit/Projects/zenChat/backend/package-lock.json                        | JSON               |      3,332 |          0 |          1 |      3,333 |
+| /home/ankit/Projects/zenChat/backend/package.json                             | JSON               |         60 |          0 |          1 |         61 |
+| /home/ankit/Projects/zenChat/backend/src/app.ts                               | TypeScript         |         85 |         12 |         16 |        113 |
+| /home/ankit/Projects/zenChat/backend/src/config.ts                            | TypeScript         |         20 |          0 |          6 |         26 |
+| /home/ankit/Projects/zenChat/backend/src/constants/index.ts                   | TypeScript         |         13 |          0 |          1 |         14 |
+| /home/ankit/Projects/zenChat/backend/src/controllers/auth/authUtils.ts        | TypeScript         |         50 |          0 |         11 |         61 |
+| /home/ankit/Projects/zenChat/backend/src/controllers/chat.controller.ts       | TypeScript         |        239 |         41 |         63 |        343 |
+| /home/ankit/Projects/zenChat/backend/src/controllers/message.controller.ts    | TypeScript         |        165 |         19 |         39 |        223 |
+| /home/ankit/Projects/zenChat/backend/src/controllers/user.controller.ts       | TypeScript         |         70 |          4 |         21 |         95 |
+| /home/ankit/Projects/zenChat/backend/src/core/ApiError.ts                     | TypeScript         |        107 |          1 |         19 |        127 |
+| /home/ankit/Projects/zenChat/backend/src/core/ApiResponse.ts                  | TypeScript         |        105 |          5 |         20 |        130 |
+| /home/ankit/Projects/zenChat/backend/src/core/JWT.ts                          | TypeScript         |         67 |          4 |          9 |         80 |
+| /home/ankit/Projects/zenChat/backend/src/database/index.ts                    | TypeScript         |         42 |          5 |         10 |         57 |
+| /home/ankit/Projects/zenChat/backend/src/database/model/Chat.ts               | TypeScript         |         53 |          2 |         12 |         67 |
+| /home/ankit/Projects/zenChat/backend/src/database/model/Message.ts            | TypeScript         |         55 |          2 |          8 |         65 |
+| /home/ankit/Projects/zenChat/backend/src/database/model/Role.ts               | TypeScript         |         24 |          1 |          7 |         32 |
+| /home/ankit/Projects/zenChat/backend/src/database/model/User.ts               | TypeScript         |         70 |          2 |         14 |         86 |
+| /home/ankit/Projects/zenChat/backend/src/database/repositories/chatRepo.ts    | TypeScript         |        168 |         13 |         12 |        193 |
+| /home/ankit/Projects/zenChat/backend/src/database/repositories/messageRepo.ts | TypeScript         |        100 |          9 |         11 |        120 |
+| /home/ankit/Projects/zenChat/backend/src/database/repositories/userRepo.ts    | TypeScript         |        125 |         10 |         16 |        151 |
+| /home/ankit/Projects/zenChat/backend/src/helpers/asyncHandler.ts              | TypeScript         |         10 |          0 |          3 |         13 |
+| /home/ankit/Projects/zenChat/backend/src/helpers/colorsUtils.ts               | TypeScript         |         33 |          3 |          5 |         41 |
+| /home/ankit/Projects/zenChat/backend/src/helpers/utils.ts                     | TypeScript         |         21 |          1 |          5 |         27 |
+| /home/ankit/Projects/zenChat/backend/src/middlewares/auth.middlewares.ts      | TypeScript         |         37 |          0 |          7 |         44 |
+| /home/ankit/Projects/zenChat/backend/src/middlewares/multer.middlwares.ts     | TypeScript         |         33 |          3 |          5 |         41 |
+| /home/ankit/Projects/zenChat/backend/src/routes/chat.routes.ts                | TypeScript         |         35 |          7 |          9 |         51 |
+| /home/ankit/Projects/zenChat/backend/src/routes/message.routes.ts             | TypeScript         |         27 |          1 |          7 |         35 |
+| /home/ankit/Projects/zenChat/backend/src/routes/user.routes.ts                | TypeScript         |         12 |          0 |          4 |         16 |
+| /home/ankit/Projects/zenChat/backend/src/seeds/seedRoles.ts                   | TypeScript         |         24 |          0 |          4 |         28 |
+| /home/ankit/Projects/zenChat/backend/src/server.ts                            | TypeScript         |          5 |          0 |          2 |          7 |
+| /home/ankit/Projects/zenChat/backend/src/socket/index.ts                      | TypeScript         |         79 |          9 |         15 |        103 |
+| /home/ankit/Projects/zenChat/backend/src/types/app-request.d.ts               | TypeScript         |          6 |          0 |          2 |          8 |
+| /home/ankit/Projects/zenChat/backend/src/types/index.ts                       | TypeScript         |          0 |          0 |          1 |          1 |
+| /home/ankit/Projects/zenChat/backend/src/validators/groupChat.validator.ts    | TypeScript         |         23 |          0 |          3 |         26 |
+| /home/ankit/Projects/zenChat/backend/src/validators/messages.validator.ts     | TypeScript         |         10 |          0 |          2 |         12 |
+| /home/ankit/Projects/zenChat/backend/src/validators/mongoId.validator.ts      | TypeScript         |         17 |          0 |          3 |         20 |
+| /home/ankit/Projects/zenChat/backend/src/validators/user.validators.ts        | TypeScript         |         33 |          0 |          6 |         39 |
+| /home/ankit/Projects/zenChat/backend/src/validators/validate.ts               | TypeScript         |         21 |          3 |          6 |         30 |
+| /home/ankit/Projects/zenChat/backend/tsconfig.json                            | JSON with Comments |         24 |         24 |          2 |         50 |
+| /home/ankit/Projects/zenChat/client/.eslintrc.cjs                             | JavaScript         |         21 |          0 |          1 |         22 |
+| /home/ankit/Projects/zenChat/client/Dockerfile                                | Docker             |         11 |          2 |         19 |         32 |
+| /home/ankit/Projects/zenChat/client/README.md                                 | Markdown           |          5 |          0 |          4 |          9 |
+| /home/ankit/Projects/zenChat/client/index.html                                | HTML               |         13 |          0 |          1 |         14 |
+| /home/ankit/Projects/zenChat/client/nginxDefault.conf                         | Properties         |         14 |         24 |          8 |         46 |
+| /home/ankit/Projects/zenChat/client/package-lock.json                         | JSON               |      5,922 |          0 |          1 |      5,923 |
+| /home/ankit/Projects/zenChat/client/package.json                              | JSON               |         38 |          0 |          1 |         39 |
+| /home/ankit/Projects/zenChat/client/postcss.config.js                         | JavaScript         |          6 |          0 |          1 |          7 |
+| /home/ankit/Projects/zenChat/client/public/logo.svg                           | XML                |          1 |          0 |          0 |          1 |
+| /home/ankit/Projects/zenChat/client/src/App.jsx                               | JavaScript JSX     |         68 |          1 |          5 |         74 |
+| /home/ankit/Projects/zenChat/client/src/api/index.js                          | JavaScript         |         62 |         11 |         17 |         90 |
+| /home/ankit/Projects/zenChat/client/src/assets/index.js                       | JavaScript         |         65 |          1 |          4 |         70 |
+| /home/ankit/Projects/zenChat/client/src/assets/svgs/logo.svg                  | XML                |          1 |          0 |          0 |          1 |
+| /home/ankit/Projects/zenChat/client/src/components/AddChat.jsx                | JavaScript JSX     |        274 |         10 |         16 |        300 |
+| /home/ankit/Projects/zenChat/client/src/components/ChatLeftSidebar.jsx        | JavaScript JSX     |         23 |          0 |          3 |         26 |
+| /home/ankit/Projects/zenChat/client/src/components/ChatsSection.jsx           | JavaScript JSX     |        281 |         27 |         17 |        325 |
+| /home/ankit/Projects/zenChat/client/src/components/DesktopOnly.jsx            | JavaScript JSX     |          8 |          0 |          2 |         10 |
+| /home/ankit/Projects/zenChat/client/src/components/IncomingCall.jsx           | JavaScript JSX     |         48 |          0 |          3 |         51 |
+| /home/ankit/Projects/zenChat/client/src/components/Loading.jsx                | JavaScript JSX     |         36 |          0 |          3 |         39 |
+| /home/ankit/Projects/zenChat/client/src/components/PopupAlert.jsx             | JavaScript JSX     |         26 |          0 |          5 |         31 |
+| /home/ankit/Projects/zenChat/client/src/components/PrivateRoute.jsx           | JavaScript JSX     |         10 |          2 |          4 |         16 |
+| /home/ankit/Projects/zenChat/client/src/components/ProfileSidebar.jsx         | JavaScript JSX     |         62 |          0 |          8 |         70 |
+| /home/ankit/Projects/zenChat/client/src/components/PublicRoute.jsx            | JavaScript JSX     |         10 |          2 |          4 |         16 |
+| /home/ankit/Projects/zenChat/client/src/components/RecentChatsSidebar.jsx     | JavaScript JSX     |        100 |          1 |         10 |        111 |
+| /home/ankit/Projects/zenChat/client/src/components/RecentUserChatCard.jsx     | JavaScript JSX     |         70 |          4 |          4 |         78 |
+| /home/ankit/Projects/zenChat/client/src/components/SearchUserSidebar.jsx      | JavaScript JSX     |         97 |          1 |         10 |        108 |
+| /home/ankit/Projects/zenChat/client/src/components/SideMenu.jsx               | JavaScript JSX     |         50 |          0 |          4 |         54 |
+| /home/ankit/Projects/zenChat/client/src/components/ThemeSwitchButton.jsx      | JavaScript JSX     |         14 |          0 |          4 |         18 |
+| /home/ankit/Projects/zenChat/client/src/components/VideoChat.jsx              | JavaScript JSX     |         66 |          1 |          5 |         72 |
+| /home/ankit/Projects/zenChat/client/src/context/AuthContext.jsx               | JavaScript JSX     |         82 |         21 |         15 |        118 |
+| /home/ankit/Projects/zenChat/client/src/context/ChatContext.jsx               | JavaScript JSX     |        192 |         40 |         33 |        265 |
+| /home/ankit/Projects/zenChat/client/src/context/SocketContext.jsx             | JavaScript JSX     |         42 |          4 |         11 |         57 |
+| /home/ankit/Projects/zenChat/client/src/context/ThemeContext.jsx              | JavaScript JSX     |          7 |          0 |          4 |         11 |
+| /home/ankit/Projects/zenChat/client/src/context/ThemeContextWrapper.jsx       | JavaScript JSX     |         20 |          0 |          5 |         25 |
+| /home/ankit/Projects/zenChat/client/src/context/WebRtcContext.jsx             | JavaScript JSX     |        253 |         32 |         40 |        325 |
+| /home/ankit/Projects/zenChat/client/src/index.css                             | CSS                |         52 |          5 |         13 |         70 |
+| /home/ankit/Projects/zenChat/client/src/main.jsx                              | JavaScript JSX     |         20 |          0 |          2 |         22 |
+| /home/ankit/Projects/zenChat/client/src/pages/Chat.jsx                        | JavaScript JSX     |         45 |          0 |          4 |         49 |
+| /home/ankit/Projects/zenChat/client/src/pages/Login.jsx                       | JavaScript JSX     |         83 |          2 |         11 |         96 |
+| /home/ankit/Projects/zenChat/client/src/pages/Register.jsx                    | JavaScript JSX     |         90 |          2 |         10 |        102 |
+| /home/ankit/Projects/zenChat/client/src/utils/index.js                        | JavaScript         |         78 |         15 |         14 |        107 |
+| /home/ankit/Projects/zenChat/client/tailwind.config.js                        | JavaScript         |         28 |          1 |          3 |         32 |
+| /home/ankit/Projects/zenChat/client/vercel.json                               | JSON               |          8 |          0 |          1 |          9 |
+| /home/ankit/Projects/zenChat/client/vite.config.js                            | JavaScript         |          5 |          1 |          2 |          8 |
+| /home/ankit/Projects/zenChat/docker-compose.yml                               | YAML               |         32 |          0 |          5 |         37 |
+| Total                                                                         |                    |     13,962 |        392 |        794 |     15,148 |
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
