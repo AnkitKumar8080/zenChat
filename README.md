@@ -1,6 +1,6 @@
 # zenChat
 
-![zenChat](./screenshots/hero_dark.png)
+![zenChat](./screenshots/hero_dark1.png)
 
 ## Overview
 
@@ -148,7 +148,7 @@ This is a full-featured chat and video call application built using the MERN sta
 
 ### Chat Interface
 
-![Chat Interface](./screenshots/hero_light.png)
+![Chat Interface](./screenshots/hero_light1.png)
 
 ### Create a One to One Chat
 
