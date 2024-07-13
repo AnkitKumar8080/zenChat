@@ -54,20 +54,20 @@ pipeline {
       steps {
         script {
           def envContent = """
-          NODE_ENV = 'development'
-          PORT = "5000"
-          CORS_URL = "https://zenchat-indol.vercel.app"
-          SERVER_URL = "https://zenchatapi.bytebreeze.xyz
-          DB_URL = ${credentials('ZENCHAT_DB_URL')}
-          DB_NAME = "ZenChat"
-          DB_MIN_POOL_SIZE = "2"
-          DB_MAX_POOL_SIZE = "5
-          COOKIE_VALIDITY_SEC = "172800"
-          ACCESS_TOKEN_VALIDITY_SEC = "182800"
-          REFRESH_TOKEN_VALIDITY_SEC = "604800"
-          TOKEN_ISSUER = "api.zenchat.com"
-          TOKEN_AUDIENCE = "zenchat.com
-          JWT_SECRET_KEY = ${credentials('ZENCHAT_JWT_SECRET_KEY')}
+          NODE_ENV='development'
+          PORT="5000"
+          CORS_URL="https://zenchat-indol.vercel.app"
+          SERVER_URL="https://zenchatapi.bytebreeze.xyz
+          DB_URL=${credentials('ZENCHAT_DB_URL')}
+          DB_NAME="ZenChat"
+          DB_MIN_POOL_SIZE="2"
+          DB_MAX_POOL_SIZE="5
+          COOKIE_VALIDITY_SEC="172800"
+          ACCESS_TOKEN_VALIDITY_SEC="182800"
+          REFRESH_TOKEN_VALIDITY_SEC="604800"
+          TOKEN_ISSUER="api.zenchat.com"
+          TOKEN_AUDIENCE="zenchat.com
+          JWT_SECRET_KEY=${credentials('ZENCHAT_JWT_SECRET_KEY')}
           """
 
           writeFile file: '.env', text: envContent
