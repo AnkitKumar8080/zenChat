@@ -71,8 +71,8 @@ pipeline {
             JWT_SECRET_KEY=${JWT_SECRET_KEY}
             """
 
-          writeFile file: '.env', text: envContent
-
+            writeFile file: '.env', text: envContent
+          }
         }
       }
     }
