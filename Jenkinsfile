@@ -53,7 +53,7 @@ pipeline {
     stage('creating .env file') {
       steps {
         script {
-          dev envContent = """
+          def envContent = """
           NODE_ENV = 'development'
           PORT = "5000"
           CORS_URL = "https://zenchat-indol.vercel.app"
