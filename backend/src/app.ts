@@ -60,7 +60,7 @@ app.use(
 app.use(morgan("dev"));
 app.use(cookieParser());
 
-// HEALTH CHECK ROUTE
+// HEALTH CHECK ROUTE URI
 app.get("/health", (req, res) => {
   res.send("healthy");
 });

@@ -77,7 +77,7 @@ pipeline {
     }
 
     // Run the docker container
-    stage('Spinning docker container') {
+    stage('Spinning up docker container') {
       steps {
         sh "docker run -d --name ${DOCKER_CONTAINER_NAME} -p 5005:5004 --env-file .env ${DOCKER_IMAGE_NAME}:${VERSION_COMMIT_HASH}"
       }
