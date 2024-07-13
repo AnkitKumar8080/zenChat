@@ -60,6 +60,11 @@ app.use(
 app.use(morgan("dev"));
 app.use(cookieParser());
 
+// HEALTH CHECK ROUTE
+app.get("/health", (req, res) => {
+  res.send("healthy");
+});
+
 // auth Routes
 app.use("/auth", authRoutes);
 
