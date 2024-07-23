@@ -60,7 +60,7 @@ export default function SearchUserSidebar() {
     }
   };
   return (
-    <div className="px-5 py-6 w-full ">
+    <div className="px-5 py-6 w-full h-full ">
       <div className="top">
         <h1 className="text-black font-medium text-xl dark:text-white">
           Search Users

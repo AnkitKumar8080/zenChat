@@ -55,7 +55,11 @@ app.use(limiter);
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(
-  cors({ origin: corsUrl, optionsSuccessStatus: 200, credentials: true })
+  cors({
+    origin: corsUrl,
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
 );
 app.use(morgan("dev"));
 app.use(cookieParser());

@@ -3,7 +3,7 @@ import { RiArrowDropDownLine, RiArrowDropUpLine, profile } from "../assets";
 import { useAuth } from "../context/AuthContext";
 
 export default function ProfileSidebar() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const colapseFieldValues = [
     {
@@ -19,11 +19,20 @@ export default function ProfileSidebar() {
   const [isColapsed, setIsColapsed] = useState(false);
 
   return (
-    <div className="w-[380px] h-full px-5 py-6">
+    <div className="w-[380px] md:w-screen h-full px-5 py-6">
       <div>
-        <h1 className="text-black font-semibold text-2xl dark:text-white">
-          My Profile
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-black font-semibold text-2xl dark:text-white">
+            My Profile
+          </h1>
+
+          <div
+            onClick={logout}
+            className="text-red-500 cursor-pointer text-sm font-medium"
+          >
+            Log out
+          </div>
+        </div>
 
         <div className="w-full flex flex-col items-center justify-center gap-3 my-10">
           <img

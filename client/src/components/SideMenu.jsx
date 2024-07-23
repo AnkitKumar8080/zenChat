@@ -12,12 +12,12 @@ export default function SideMenu({ activeLeftSidebar, setActiveLeftSidebar }) {
   const { logout, user } = useAuth();
 
   return (
-    <div className="side-menu h-full w-[75px] flex flex-col items-center justify-between py-5 border-r-2 dark:border-none dark:bg-backgroundDark1 ">
-      <div className=" w-10">
+    <div className="side-menu h-full md:w-full md:h-max md:px-3 md:m-0 w-[75px] flex flex-col items-center justify-between py-5 border-r-2 dark:border-none dark:bg-backgroundDark1 md:flex-row">
+      <div className=" w-10 md:w-6 ">
         <img src={logo} alt="zenchat" />
       </div>
       <div>
-        <ul className="flex flex-col gap-10">
+        <ul className="flex flex-col gap-10 md:gap-8 md:flex-row">
           {sideMenuOptions.map(({ Icon, name }, index) => (
             <li
               className={`text-3xl  cursor-pointer hover:text-primary transition-none ${
@@ -30,19 +30,19 @@ export default function SideMenu({ activeLeftSidebar, setActiveLeftSidebar }) {
           ))}
         </ul>
       </div>
-      <div className="flex flex-col gap-5 items-center">
-        <span className="text-2xl cursor-pointer">
+      <div className="flex flex-col gap-5 items-center md:flex-row ">
+        <div className="text-2xl md:text-md font-extrabold cursor-pointer">
           <ThemeSwitchButton />
-        </span>
+        </div>
 
-        <span
+        <div
           onClick={logout}
-          className="text-red-500 cursor-pointer text-sm font-medium"
+          className="md:hidden text-red-500 cursor-pointer text-sm font-medium"
         >
           Log out
-        </span>
+        </div>
         <img
-          className="size-10 rounded-full object-cover cursor-pointer"
+          className="md:hidden size-10 rounded-full object-cover cursor-pointer"
           src={user.avatarUrl}
           alt="themeButton"
           loading="lazy"

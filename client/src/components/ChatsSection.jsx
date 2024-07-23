@@ -8,6 +8,7 @@ import {
   IoMdSend,
   IoVideocamOutline,
   LuClock3,
+  MdArrowBackIos,
   MdDeleteOutline,
   RxCross2,
   profile,
@@ -114,6 +115,7 @@ export default function ChatsSection() {
     setAttachments,
     removeFileFromAttachments,
     deleteUserChat,
+    setIsChatSelected,
   } = useChat();
   const { user } = useAuth();
 
@@ -146,6 +148,10 @@ export default function ChatsSection() {
     <div className="overflow-y-hidden">
       <div className="flex w-full items-center justify-between p-5 shadow-md ">
         <div className="flex gap-3 items-center ">
+          <div onClick={() => setIsChatSelected(false)}>
+            {" "}
+            <MdArrowBackIos className="dark:text-white text-2xl" />{" "}
+          </div>
           {currentSelectedChat.current.isGroupChat ? (
             <div className="w-12 relative h-12 flex-shrink-0 flex justify-start items-center flex-nowrap">
               {currentSelectedChat.current.participants

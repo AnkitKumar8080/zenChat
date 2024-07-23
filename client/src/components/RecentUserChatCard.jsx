@@ -8,6 +8,7 @@ export default function RecentUserChatCard({ chat, onClick, isActive }) {
   const { user } = useAuth();
 
   const filteredChat = getChatObjectMetadata(chat, user); // filter the chat object metadata
+
   return (
     <div
       onClick={() => onClick(chat)}

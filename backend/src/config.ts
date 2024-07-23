@@ -12,7 +12,9 @@ export const db = {
   maxPoolSize: parseInt(process.env.DB_MAX_POOL_SIZE || "10"),
 };
 
-export const corsUrl = process.env.CORS_URL || "";
+// spliting the corlUrl and return url string array
+export const corsUrl = process.env.CORS_URL?.split(",") || [];
+console.log(corsUrl);
 
 export const cookieValidity = process.env.COOKIE_VALIDITY_SEC || "0";
 

@@ -11,20 +11,24 @@ import { useConnectWebRtc } from "../context/WebRtcContext";
 import IncomingCall from "../components/IncomingCall";
 
 export default function Chat() {
-  const { currentSelectedChat, activeLeftSidebar, setActiveLeftSidebar } =
-    useChat();
+  const {
+    currentSelectedChat,
+    activeLeftSidebar,
+    setActiveLeftSidebar,
+    isChatSelected,
+  } = useChat();
   const { showVideoComp, incomingOffer } = useConnectWebRtc();
 
   return (
-    <div className="h-screen w-full">
+    <div className="h-full md:h-[calc(100%-500px)] w-full ">
       <AddChat open={true} />
       {!!incomingOffer && (
         <IncomingCall incomingOffer={incomingOffer} active={!!incomingOffer} />
       )}
 
       <VideoChat show={showVideoComp} />
-      <div className="w-full  h-screen flex dark:bg-backgroundDark3">
-        <div className="h-full">
+      <div className="w-full  h-screen flex dark:bg-backgroundDark3 relative">
+        <div className="h-full md:h-fit md:absolute md:bottom-0 md:w-full md:hidden">
           <SideMenu
             setActiveLeftSidebar={setActiveLeftSidebar}
             activeLeftSidebar={activeLeftSidebar}
@@ -33,7 +37,13 @@ export default function Chat() {
         <div>
           <ChatLeftSidebar activeLeftSidebar={activeLeftSidebar} />
         </div>
-        <div className="w-full">
+        <div
+          className={`w-full md:${
+            isChatSelected && activeLeftSidebar === "recentChats"
+              ? "block"
+              : "hidden"
+          }`}
+        >
           {currentSelectedChat.current?._id ? (
             <ChatsSection />
           ) : (
@@ -42,6 +52,13 @@ export default function Chat() {
             </div>
           )}
         </div>
+      </div>
+
+      <div className="hidden md:block">
+        <SideMenu
+          setActiveLeftSidebar={setActiveLeftSidebar}
+          activeLeftSidebar={activeLeftSidebar}
+        />
       </div>
     </div>
   );

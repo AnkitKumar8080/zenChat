@@ -35,6 +35,9 @@ export const ChatProvider = ({ children }) => {
   // state to manage the left menu activeSidebar has three values: ["profile", "recentChats", "searchUser"]
   const [activeLeftSidebar, setActiveLeftSidebar] = useState("recentChats");
 
+  // state for mobile responsive
+  const [isChatSelected, setIsChatSelected] = useState(false);
+
   // ref to maintain the current selected chat
   const currentSelectedChat = useRef();
 
@@ -256,6 +259,8 @@ export const ChatProvider = ({ children }) => {
         setActiveLeftSidebar,
         deleteChatMessage,
         deleteUserChat,
+        isChatSelected,
+        setIsChatSelected,
       }}
     >
       {children}

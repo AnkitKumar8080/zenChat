@@ -104,3 +104,13 @@ export const getChatObjectMetadata = (chat, currentUser) => {
 export const getOpponentParticipant = (participants, currentUserId) => {
   return participants?.find((participant) => participant._id !== currentUserId);
 };
+
+// function to check if a string is valid json object
+export const isValidJSON = (str) => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};

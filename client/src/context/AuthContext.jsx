@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LocalStorage, requestHandler } from "../utils";
+import { isValidJSON, LocalStorage, requestHandler } from "../utils";
 import { loginUser, logoutUser, registerUser } from "../api";
 
 // creating a Auth context to manage authentication
@@ -13,10 +13,14 @@ const useAuth = () => useContext(AuthContext);
 const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
+    isValidJSON(localStorage.getItem("user"))
+      ? JSON.parse(localStorage.getItem("user"))
+      : null
   );
   const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("token")) || null
+    isValidJSON(localStorage.getItem("token"))
+      ? JSON.parse(localStorage.getItem("token"))
+      : null
   );
   const [authMessage, setAuthMessage] = useState(null);
   const [authError, setAuthError] = useState(null);

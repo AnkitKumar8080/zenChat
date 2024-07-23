@@ -14,6 +14,8 @@ export default function RecentChatsSidebar() {
     setMessages,
     getMessages,
     currentSelectedChat,
+    isChatSelected,
+    setIsChatSelected,
   } = useChat();
   const { user } = useAuth();
 
@@ -52,7 +54,11 @@ export default function RecentChatsSidebar() {
   }, []);
 
   return (
-    <div className="px-5 py-6 w-full">
+    <div
+      className={` px-5 py-6 md:p-2 w-full h-full md:${
+        isChatSelected ? "hidden" : "block"
+      }`}
+    >
       <div className="top">
         <h1 className="text-black font-medium text-xl dark:text-white">
           Recent chats
@@ -97,6 +103,7 @@ export default function RecentChatsSidebar() {
                     return;
                   LocalStorage.set("currentSelectedChat", chat);
                   currentSelectedChat.current = chat;
+                  setIsChatSelected(true);
                   setMessages([]);
                   getMessages(currentSelectedChat.current?._id);
                 }}
