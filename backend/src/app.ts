@@ -66,7 +66,7 @@ app.use(cookieParser());
 
 // HEALTH CHECK ROUTE
 app.get("/health", (req, res) => {
-  res.send("healthy");
+  res.send("healthy running");
 });
 
 // auth Routes
