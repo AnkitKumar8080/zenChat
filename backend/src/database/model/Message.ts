@@ -25,7 +25,7 @@ const schema = new Schema<Message>({
 
   content: {
     type: Schema.Types.String,
-    trim: true,
+    trim: false,
     maxlength: 100000,
   },
 
