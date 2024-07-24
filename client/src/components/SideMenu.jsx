@@ -12,7 +12,7 @@ export default function SideMenu({ activeLeftSidebar, setActiveLeftSidebar }) {
   const { logout, user } = useAuth();
 
   return (
-    <div className="side-menu h-full md:w-full md:h-max md:px-3 md:m-0 w-[75px] flex flex-col items-center justify-between py-5 border-r-2 dark:border-none dark:bg-backgroundDark1 md:flex-row">
+    <div className="side-menu h-full md:w-full md:h-fit md:px-4 w-[75px] flex flex-col items-center justify-between py-5 border-r-2 dark:border-none dark:bg-backgroundDark1 md:flex-row">
       <div className=" w-10 md:w-6 ">
         <img src={logo} alt="zenchat" />
       </div>

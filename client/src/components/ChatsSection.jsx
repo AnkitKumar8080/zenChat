@@ -3,15 +3,11 @@ import {
   BiSearch,
   BsThreeDotsVertical,
   FiImage,
-  IoCallOutline,
-  IoMdAttach,
   IoMdSend,
   IoVideocamOutline,
-  LuClock3,
   MdArrowBackIos,
   MdDeleteOutline,
   RxCross2,
-  profile,
 } from "../assets";
 import { useChat } from "../context/ChatContext";
 import { useAuth } from "../context/AuthContext";
@@ -28,11 +24,13 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
     <div className={` w-full flex my-2 `}>
       <div
         className={`flex  ${
-          isOwnMessage ? "max-w-[50%]  ml-auto mr-10" : "mr-auto ml-10"
+          isOwnMessage
+            ? "max-w-[50%] ml-auto mr-10 md:mr-3"
+            : "mr-auto ml-10 md:ml-3"
         }`}
       >
         <div
-          className={`flex flex-col  justify-center relative dark:bg-opacity-20 dark:bg-primary min-w-[120px] bg-backgroundLight3  p-2  rounded-xl ${
+          className={`flex flex-col  justify-center relative dark:bg-opacity-20 dark:bg-primary min-w-[120px] bg-backgroundLight3  p-2 md:p-1 rounded-xl ${
             isOwnMessage ? "rounded-br-none" : "rounded-bl-none"
           } mb-5 ${isOwnMessage ? "order-2" : "order-1"}`}
         >
@@ -51,15 +49,15 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
           ) : (
             ""
           )}
-          <p className="p-3 text-base text-slate-900 dark:text-slate-100">
+          <p className="p-3 md:p-2 text-base md:text-md text-slate-900 dark:text-slate-100 ">
             {message.content}
           </p>
 
-          <div className="flex items-center gap-1 text-xs dark:text-slate-400 text-slate-400 absolute bottom-1 right-2">
+          <div className="flex items-center gap-1 text-xs dark:text-slate-400 text-slate-400 absolute bottom-0 right-1 ">
             {/* <span>
               <LuClock3 />
             </span> */}
-            <span className="text-[10px] ">
+            <span className="text-[10px]">
               {moment(message.createdAt)
                 .add("TIME_ZONE", "hours")
                 .fromNow(true)}{" "}
@@ -67,7 +65,9 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
             </span>
           </div>
         </div>
-        <div className={`mx-3 ${isOwnMessage ? "order-1" : "order-2"} `}>
+        <div
+          className={`mx-3 md:mx-0 ${isOwnMessage ? "order-1" : "order-2"} `}
+        >
           <div className="relative cursor-pointer text-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-300">
             <OutsideClickHandler
               onOutsideClick={() => setShowMessageMenu(false)}
@@ -76,10 +76,11 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
                 onClick={() => setShowMessageMenu(!showMessageMenu)}
               />
               {showMessageMenu ? (
-                <div className="text-slate-100 text-sm rounded-md absolute top-0 -left-14">
+                <div className="text-slate-100 bg-text_dark_secondary p-2 text-sm rounded-md absolute top-0 -left-14">
                   <p
                     onClick={() => {
                       navigator.clipboard.writeText(message.content);
+                      setShowMessageMenu(false);
                     }}
                     className=" mb-1 hover:text-slate-300"
                   >
@@ -146,14 +147,14 @@ export default function ChatsSection() {
 
   return (
     <div className="overflow-y-hidden">
-      <div className="flex w-full items-center justify-between p-5 shadow-md ">
+      <div className="flex w-full items-center justify-between p-5 md:p-4 shadow-md md:shadow-xl ">
         <div className="flex gap-3 items-center ">
           <div onClick={() => setIsChatSelected(false)}>
             {" "}
-            <MdArrowBackIos className="dark:text-white text-2xl" />{" "}
+            <MdArrowBackIos className="hidden md:block dark:text-white text-2xl" />{" "}
           </div>
           {currentSelectedChat.current.isGroupChat ? (
-            <div className="w-12 relative h-12 flex-shrink-0 flex justify-start items-center flex-nowrap">
+            <div className="w-10 relative h-10 flex-shrink-0 flex justify-start items-center flex-nowrap mr-3">
               {currentSelectedChat.current.participants
                 .slice(0, 3)
                 .map((participant, i) => {
@@ -176,7 +177,7 @@ export default function ChatsSection() {
             </div>
           ) : (
             <img
-              className="size-12 rounded-full object-cover"
+              className="size-10 rounded-full object-cover"
               src={opponentProfilePictureUrl}
               alt=""
               loading="lazy"
@@ -188,7 +189,7 @@ export default function ChatsSection() {
             src={opponentProfilePictureUrl}
             alt=""
           /> */}
-          <h3 className="font-medium text-xl text-slate-800 dark:text-white">
+          <h3 className="font-medium text-xl md:text-md text-slate-800 dark:text-white">
             {currentSelectedChat.current?.isGroupChat
               ? currentSelectedChat.current.name
               : opponentUsername}
@@ -220,10 +221,7 @@ export default function ChatsSection() {
         </div>
       </div>
 
-      <div
-        className="chat-msg-cont relative overflow-auto px-4 w-full  "
-        style={{ height: "calc(100vh - 180px)" }}
-      >
+      <div className="chat-msg-cont relative overflow-auto px-4 md:px-0 w-full h-[calc(100vh-180px)] md:h-[calc(100vh-260px)] ">
         {loadingMessages ? (
           <div className=" h-full w-full flex items-center justify-center">
             <Loading />
@@ -270,12 +268,12 @@ export default function ChatsSection() {
           ))}
         </div>
       )}
-      <div className="h-[90px] border-t shadow-xl dark:border-slate-500 light-upper-cont-shadow dark:dark-upper-cont-shadow bg-slate w-full flex items-center justify-between p-4">
-        <div className="flex-1 mr-4 ">
+      <div className="h-[90px] md:h-[60px] border-t shadow-xl dark:border-slate-500 light-upper-cont-shadow dark:dark-upper-cont-shadow bg-slate w-full flex items-center justify-between p-4 md:p-2 ">
+        <div className="flex-1 mr-4 md:mr-2 ">
           <input
             type="text"
             placeholder="Enter Message..."
-            className="w-full h-full px-4 py-2 rounded-lg dark:bg-slate-600 border border-transparent bg-backgroundLight3 focus:outline-none dark:text-white text-black "
+            className="w-full h-full px-4 py-2 md:p-2 md:text-sm rounded-lg dark:bg-slate-600 border border-transparent bg-backgroundLight3 focus:outline-none dark:text-white text-black "
             onKeyDown={(e) => {
               if (e.key === "Enter") sendChatMessage();
             }}
@@ -284,10 +282,10 @@ export default function ChatsSection() {
           />
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 md:space-x-2">
           <div>
             <label htmlFor="imageAttach" className="cursor-pointer">
-              <FiImage className="text-primary text-xl hover:text-primary_hover" />
+              <FiImage className="text-primary text-2xl md:text-md hover:text-primary_hover" />
             </label>
             <input
               type="file"
@@ -319,7 +317,7 @@ export default function ChatsSection() {
           <button
             disabled={!message && !attachments.length}
             onClick={sendChatMessage}
-            className="bg-primary hover:bg-primary_hover transition-colors px-4 py-2 rounded-lg text-white"
+            className="bg-primary hover:bg-primary_hover transition-colors px-4 py-2 md:px-3 md:py-1 rounded-lg text-white"
           >
             <IoMdSend className="text-xl" />
           </button>

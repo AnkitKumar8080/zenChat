@@ -89,7 +89,7 @@ export default function RecentChatsSidebar() {
             </h1>
           </div>
         ) : (
-          <div className="recentUserChats overflow-auto max-h-[calc(100vh-170px)]">
+          <div className="recentUserChats overflow-auto max-h-[calc(100vh-170px)] md:h-[calc(100vh-280px)]">
             {filteredRecentUserChats?.map((chat) => (
               <RecentUserChatCard
                 key={chat._id}

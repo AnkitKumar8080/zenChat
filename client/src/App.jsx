@@ -14,58 +14,53 @@ function App() {
   const { token, user } = useAuth();
 
   // const isDesktop = window.innerWidth > 768;
-  const isDesktop = window.innerWidth > 7;
   return (
     <div className="App">
-      {isDesktop ? (
-        <Routes>
-          <Route
-            path="/"
-            element={
-              token && user?._id ? (
-                <Navigate to="/chat" />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          ></Route>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            token && user?._id ? (
+              <Navigate to="/chat" />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        ></Route>
 
-          <Route
-            exact
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route
-            exact
-            path="/register"
-            element={
-              <PublicRoute>
-                <Register />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/chat"
-            element={
-              <PrivateRoute>
-                <SocketProvider>
-                  <ChatProvider>
-                    <WebRtcContextProvider>
-                      <Chat />
-                    </WebRtcContextProvider>
-                  </ChatProvider>
-                </SocketProvider>
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      ) : (
-        <DesktopOnly />
-      )}
+        <Route
+          exact
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          exact
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <PrivateRoute>
+              <SocketProvider>
+                <ChatProvider>
+                  <WebRtcContextProvider>
+                    <Chat />
+                  </WebRtcContextProvider>
+                </ChatProvider>
+              </SocketProvider>
+            </PrivateRoute>
+          }
+        />
+      </Routes>
     </div>
   );
 }

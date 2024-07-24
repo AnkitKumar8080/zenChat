@@ -60,7 +60,7 @@ export default function SearchUserSidebar() {
     }
   };
   return (
-    <div className="px-5 py-6 w-full h-full ">
+    <div className="px-5 py-6 w-full h-full">
       <div className="top">
         <h1 className="text-black font-medium text-xl dark:text-white">
           Search Users
@@ -85,7 +85,7 @@ export default function SearchUserSidebar() {
           <h1 className="text-black font-medium text-xl dark:text-white">
             {searchUsers?.length ? "Search Results" : ""}
           </h1>
-          <div className="recentUserChats h-[calc(100vh-170px)] overflow-auto ">
+          <div className="recentUserChats h-[calc(100vh-170px)] md:h-[calc(100vh-280px)] overflow-auto ">
             {!searchedUsers ? (
               <h2 className="text-center text-lg dark:text-slate-300 text-slate-500">
                 create a chat with friends by searching them !

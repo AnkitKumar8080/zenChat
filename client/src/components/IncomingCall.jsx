@@ -19,7 +19,7 @@ export default function IncomingCall({ active, incomingOffer }) {
         active ? "" : "hidden"
       }fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50`}
     >
-      <div className="bg-white dark:bg-backgroundDark3 dark:text-slate-200 rounded-lg p-6 shadow-2xl  text-center">
+      <div className="bg-white dark:bg-backgroundDark3 dark:text-slate-200 rounded-lg p-6 shadow-2xl text-center">
         <h2 className="text-2xl font-normal mb-4">Incoming video call from</h2>
         <div className="flex flex-col items-center justify-center">
           <img

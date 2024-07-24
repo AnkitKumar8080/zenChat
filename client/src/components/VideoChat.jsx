@@ -24,7 +24,7 @@ export default function VideoChat({ show }) {
     <div
       className={`absolute ${
         show ? "" : "hidden"
-      } z-50 bg-slate-800 w-full h-full bg-opacity-80 p-20`}
+      } z-50 bg-slate-800 w-full h-full bg-opacity-80 p-20 md:p-0`}
     >
       <div className="relative bg-slate-900 w-full h-full rounded-md">
         <video
@@ -36,7 +36,7 @@ export default function VideoChat({ show }) {
           // autoPlay
           ref={localVideoRef}
           autoPlay
-          className="absolute bottom-4 left-4 w-48 h-36 object-cover border-2 border-white rounded-md"
+          className="absolute bottom-4 left-4 md:left-3 md:bottom-3 w-48 h-36 md:w-24 md:h-36 object-cover border-2 md:border-[1px] border-white rounded-md"
         ></video>
 
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-4">

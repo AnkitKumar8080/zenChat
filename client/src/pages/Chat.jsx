@@ -20,14 +20,14 @@ export default function Chat() {
   const { showVideoComp, incomingOffer } = useConnectWebRtc();
 
   return (
-    <div className="h-full md:h-[calc(100%-500px)] w-full ">
+    <div className="h-full w-full ">
       <AddChat open={true} />
       {!!incomingOffer && (
         <IncomingCall incomingOffer={incomingOffer} active={!!incomingOffer} />
       )}
 
       <VideoChat show={showVideoComp} />
-      <div className="w-full  h-screen flex dark:bg-backgroundDark3 relative">
+      <div className="w-full h-screen md:h-[100%] flex dark:bg-backgroundDark3 relative">
         <div className="h-full md:h-fit md:absolute md:bottom-0 md:w-full md:hidden">
           <SideMenu
             setActiveLeftSidebar={setActiveLeftSidebar}
@@ -53,8 +53,7 @@ export default function Chat() {
           )}
         </div>
       </div>
-
-      <div className="hidden md:block">
+      <div className="hidden md:block ">
         <SideMenu
           setActiveLeftSidebar={setActiveLeftSidebar}
           activeLeftSidebar={activeLeftSidebar}
