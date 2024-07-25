@@ -70,7 +70,7 @@ export default function WebRtcContextProvider({ children }) {
 
   // flip camera
   const flipCamera = async () => {
-    cameraFace.current === "user" ? "environment" : "user";
+    cameraFace.current = cameraFace.current === "user" ? "environment" : "user";
 
     // stop all local media tracks
     if (localStreamRef.current) {
@@ -80,13 +80,13 @@ export default function WebRtcContextProvider({ children }) {
     await fetchUserMedia(cameraFace.current);
 
     // replace the tracks in the peer connection
-    const videoTrack = localStreamRef.current.getVideoTracks()[0];
-    const sender = peerConnectionRef.current
-      .getSenders()
-      .find((s) => s.track.kind === videoTrack.kind);
-    if (sender) {
-      sender.replaceTrack(videoTrack);
-    }
+    // const videoTrack = localStreamRef.current.getVideoTracks()[0];
+    // const sender = peerConnectionRef.current
+    //   .getSenders()
+    //   .find((s) => s.track.kind === videoTrack.kind);
+    // if (sender) {
+    //   sender.replaceTrack(videoTrack);
+    // }
   };
 
   // create RTC peer connection
