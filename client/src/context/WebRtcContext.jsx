@@ -44,11 +44,11 @@ export default function WebRtcContextProvider({ children }) {
   const userId = user._id;
 
   // fetch user media
-  const fetchUserMedia = async () => {
+  const fetchUserMedia = async (facingMode = "user") => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: cameraFace.current,
+          facingMode,
         },
         audio: {
           echoCancellation: true,
@@ -65,6 +65,27 @@ export default function WebRtcContextProvider({ children }) {
       localStreamRef.current = stream;
     } catch (error) {
       console.log("Error while fetching userMedia..." + error);
+    }
+  };
+
+  // flip camera
+  const flipCamera = async () => {
+    cameraFace.current === "user" ? "environment" : "user";
+
+    // stop all local media tracks
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach((track) => track.stop());
+    }
+
+    await fetchUserMedia(cameraFace.current);
+
+    // replace the tracks in the peer connection
+    const videoTrack = localStreamRef.current.getVideoTracks()[0];
+    const sender = peerConnectionRef.current
+      .getSenders()
+      .find((s) => s.track.kind === videoTrack.kind);
+    if (sender) {
+      sender.replaceTrack(videoTrack);
     }
   };
 
@@ -313,7 +334,7 @@ export default function WebRtcContextProvider({ children }) {
         isMicrophoneActive,
         isCameraActive,
         audioRef,
-        cameraFace,
+        flipCamera,
       }}
     >
       <audio ref={audioRef} src={ringtone} loop></audio>

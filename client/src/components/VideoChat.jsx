@@ -19,12 +19,8 @@ export default function VideoChat({ show }) {
     handleToggleMicrophone,
     isCameraActive,
     isMicrophoneActive,
-    cameraFace,
+    flipCamera,
   } = useConnectWebRtc();
-
-  const handleCameraFace = () => {
-    cameraFace.current = cameraFace.current === "user" ? "environment" : "user";
-  };
 
   return (
     <div
@@ -59,7 +55,7 @@ export default function VideoChat({ show }) {
             {isCameraActive ? <FaVideo /> : <FaVideoSlash />}
           </button>
           <button
-            onClick={handleCameraFace}
+            onClick={() => flipCamera}
             className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
           >
             <MdFlipCameraAndroid />
