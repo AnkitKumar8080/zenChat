@@ -80,13 +80,15 @@ export default function WebRtcContextProvider({ children }) {
     await fetchUserMedia(cameraFace.current);
 
     // replace the tracks in the peer connection
-    // const videoTrack = localStreamRef.current.getVideoTracks()[0];
-    // const sender = peerConnectionRef.current
-    //   .getSenders()
-    //   .find((s) => s.track.kind === videoTrack.kind);
-    // if (sender) {
-    //   sender.replaceTrack(videoTrack);
-    // }
+    if (peerConnectionRef.current) {
+      const videoTrack = localStreamRef.current.getVideoTracks()[0];
+      const sender = peerConnectionRef.current
+        .getSenders()
+        .find((s) => s.track.kind === videoTrack.kind);
+      if (sender) {
+        sender.replaceTrack(videoTrack);
+      }
+    }
   };
 
   // create RTC peer connection
