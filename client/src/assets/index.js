@@ -25,6 +25,7 @@ import { FaVideo } from "react-icons/fa";
 import { FaVideoSlash } from "react-icons/fa";
 import { MdCallEnd } from "react-icons/md";
 import { MdArrowBackIos } from "react-icons/md";
+import { MdFlipCameraAndroid } from "react-icons/md";
 
 import logo from "./svgs/logo.svg";
 import profile from "./images/profile.png";
@@ -67,5 +68,6 @@ export {
   FaMicrophone,
   FaVideoSlash,
   MdArrowBackIos,
+  MdFlipCameraAndroid,
   ringtone,
 };

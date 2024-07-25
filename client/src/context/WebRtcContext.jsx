@@ -313,6 +313,7 @@ export default function WebRtcContextProvider({ children }) {
         isMicrophoneActive,
         isCameraActive,
         audioRef,
+        cameraFace,
       }}
     >
       <audio ref={audioRef} src={ringtone} loop></audio>

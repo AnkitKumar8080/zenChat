@@ -5,6 +5,7 @@ import {
   FaMicrophone,
   FaVideo,
   MdCallEnd,
+  MdFlipCameraAndroid,
 } from "../assets";
 import { useConnectWebRtc } from "../context/WebRtcContext";
 
@@ -18,7 +19,12 @@ export default function VideoChat({ show }) {
     handleToggleMicrophone,
     isCameraActive,
     isMicrophoneActive,
+    cameraFace,
   } = useConnectWebRtc();
+
+  const handleCameraFace = () => {
+    cameraFace.current = cameraFace.current === "user" ? "environment" : "user";
+  };
 
   return (
     <div
@@ -51,6 +57,12 @@ export default function VideoChat({ show }) {
             className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
           >
             {isCameraActive ? <FaVideo /> : <FaVideoSlash />}
+          </button>
+          <button
+            onClick={handleCameraFace}
+            className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
+          >
+            <MdFlipCameraAndroid />
           </button>
           <button
             onClick={handleHangup}
