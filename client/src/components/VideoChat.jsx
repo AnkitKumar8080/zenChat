@@ -55,7 +55,7 @@ export default function VideoChat({ show }) {
             {isCameraActive ? <FaVideo /> : <FaVideoSlash />}
           </button>
           <button
-            onClick={() => flipCamera}
+            onClick={flipCamera}
             className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
           >
             <MdFlipCameraAndroid />
