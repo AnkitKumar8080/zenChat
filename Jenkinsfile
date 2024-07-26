@@ -21,8 +21,9 @@ pipeline {
           def changes = sh(script: 'git diff --name-only HEAD HEAD~1', returnStdout: true).trim()
 
           if (!changes.contains("backend/") && !changes.contains("Jenkinsfile")) {
+            echo "No changes found in the backend directory, skipping build."
             currentBuild.result = 'SUCCESS'
-            error("No changes found in the backend directory, skipping build.")
+            return
           }
         }
       }
