@@ -21,13 +21,12 @@ pipeline {
           def changes = sh(script: 'git diff --name-only HEAD HEAD~1', returnStdout: true).trim()
 
           if (!changes.contains("backend/") && !changes.contains("Jenkinsfile")) {
-            echo "No changes found in the backend directory, skipping build."
             currentBuild.result = 'SUCCESS'
-            return
+            error("No changes found in the backend directory, skipping build.")
           }
         }
       }
-    }
+    } 
 
     stage('Building Backend') {
       steps {
@@ -81,7 +80,7 @@ pipeline {
     // Run the docker container
     stage('Spinning up docker container') {
       steps {
-        sh "docker run -d --name ${DOCKER_CONTAINER_NAME} -p 5000:5000 --env-file .env ${DOCKER_IMAGE_NAME}:${VERSION_COMMIT_HASH}"
+        sh "docker run -d --restart unless-stopped --name ${DOCKER_CONTAINER_NAME} -p 5000:5000 --env-file .env ${DOCKER_IMAGE_NAME}:${VERSION_COMMIT_HASH}"
       }
     }
   }
