@@ -26,6 +26,10 @@ import { FaVideoSlash } from "react-icons/fa";
 import { MdCallEnd } from "react-icons/md";
 import { MdArrowBackIos } from "react-icons/md";
 import { MdFlipCameraAndroid } from "react-icons/md";
+import { PiDownloadSimpleBold } from "react-icons/pi";
+import { ImEnlarge2 } from "react-icons/im";
+import { IoClose } from "react-icons/io5";
+import { FaFile } from "react-icons/fa";
 
 import logo from "./svgs/logo.svg";
 import profile from "./images/profile.png";
@@ -69,5 +73,9 @@ export {
   FaVideoSlash,
   MdArrowBackIos,
   MdFlipCameraAndroid,
+  PiDownloadSimpleBold,
+  ImEnlarge2,
+  IoClose,
+  FaFile,
   ringtone,
 };

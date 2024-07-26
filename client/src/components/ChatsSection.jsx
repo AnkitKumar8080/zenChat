@@ -1,25 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
+import { saveAs } from "file-saver";
+import mime from "mime-types";
 import {
   BiSearch,
   BsThreeDotsVertical,
+  FaFile,
   FiImage,
+  ImEnlarge2,
+  IoMdAttach,
   IoMdSend,
   IoVideocamOutline,
   MdArrowBackIos,
   MdDeleteOutline,
+  PiDownloadSimpleBold,
   RxCross2,
 } from "../assets";
 import { useChat } from "../context/ChatContext";
 import { useAuth } from "../context/AuthContext";
 import moment from "moment";
 import Loading from "./Loading";
-import { getOpponentParticipant } from "../utils";
+import { getOpponentParticipant, limitChar } from "../utils";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useConnectWebRtc } from "../context/WebRtcContext";
+import ViewImage from "./ViewImage";
 
 const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
   const { deleteChatMessage } = useChat();
   const [showMessageMenu, setShowMessageMenu] = useState(false);
+  const [isOpenView, setIsOpenView] = useState(false);
+  const [currentImageUrl, setCurrentImageUrl] = useState("");
+
+  const handleEnlargeClick = (url) => {
+    setCurrentImageUrl(url);
+    setIsOpenView(true);
+  };
   return (
     <div className={` w-full flex my-2 `}>
       <div
@@ -37,13 +51,74 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
           {message.attachments?.length ? (
             <div className="flex gap-1 flex-wrap">
               {message.attachments?.map((file) => (
-                <img
-                  src={file.url}
-                  loading="lazy"
-                  className={`${
-                    message.attachments?.length > 1 ? "size-44" : "size-72"
-                  }  object-cover rounded-md`}
-                />
+                <div className="flex flex-col">
+                  <div>
+                    {(() => {
+                      const fileExtension = file.url
+                        .split("/")
+                        .pop()
+                        .split(".")
+                        .pop()
+                        .toLowerCase();
+                      const isImage = [
+                        "jpg",
+                        "jpeg",
+                        "png",
+                        "webp",
+                        "gif",
+                        "svg",
+                      ].includes(fileExtension);
+
+                      if (isImage) {
+                        return (
+                          <img
+                            src={file.url}
+                            loading="lazy"
+                            className={`${
+                              message.attachments?.length > 1
+                                ? "size-44"
+                                : "size-72"
+                            } object-cover rounded-md`}
+                          />
+                        );
+                      } else {
+                        return (
+                          <div className="flex flex-col items-center justify-center">
+                            <FaFile className="text-3xl text-slate-400" />
+                            <p>
+                              {limitChar(file.url.split("/").pop(), 10)}.
+                              {fileExtension}
+                            </p>
+                          </div>
+                        );
+                      }
+                    })()}
+
+                    {isOpenView && (
+                      <ViewImage
+                        openView={isOpenView}
+                        setOpenView={setIsOpenView}
+                        imageUrl={currentImageUrl}
+                      />
+                    )}
+                  </div>
+                  <div className="flex justify-between items-center p-1 bg-black bg-opacity-20 rounded-sm">
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => handleEnlargeClick(file.url)}
+                    >
+                      <ImEnlarge2 />
+                    </div>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => {
+                        saveAs(file.url, file.url.split("/").slice(-1));
+                      }}
+                    >
+                      <PiDownloadSimpleBold className="text-xl" />
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           ) : (
@@ -68,7 +143,7 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
         <div
           className={`mx-3 md:mx-0 ${isOwnMessage ? "order-1" : "order-2"} `}
         >
-          <div className="relative cursor-pointer text-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-300">
+          <div className=" relative cursor-pointer text-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-300">
             <OutsideClickHandler
               onOutsideClick={() => setShowMessageMenu(false)}
             >
@@ -259,11 +334,20 @@ export default function ChatsSection() {
                   onClick={() => removeFileFromAttachments(index)}
                 />
               </div>
-              <img
-                loading="lazy"
-                src={URL.createObjectURL(file)}
-                className="size-[200px] object-cover rounded-md"
-              />
+              {file.type.startsWith("image/") ? (
+                <img
+                  className="w-full h-auto object-cover"
+                  src={URL.createObjectURL(file)}
+                  alt=""
+                />
+              ) : (
+                <div className="flex flex-col gap-2 my-5 items-center">
+                  <FaFile className="text-3xl text-white" />
+                  <p className="text-xs text-slate-400 dark:text-white">
+                    {file.name}
+                  </p>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -298,7 +382,7 @@ export default function ChatsSection() {
               onChange={(e) => setAttachments([...e.target.files])}
             />
           </div>
-          {/* // future version 
+          {/* // future version  */}
           <div>
             <label htmlFor="fileAttach" className="cursor-pointer">
               <IoMdAttach className="text-primary text-xl hover:text-primary_hover" />
@@ -312,7 +396,7 @@ export default function ChatsSection() {
               multiple
               onChange={(e) => setAttachments([...e.target.files])}
             />
-          </div> */}
+          </div>
 
           <button
             disabled={!message && !attachments.length}
