@@ -78,7 +78,7 @@ export default function Login() {
 
         <div>
           <p className="text-center dark:text-slate-300">
-            Have an account already!{" "}
+            Don't have an account?{" "}
             <Link
               className="text-primary cursor-pointer hover:underline"
               to={"/register"}
