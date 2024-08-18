@@ -83,7 +83,7 @@ export default function RecentChatsSidebar() {
             <Loading />
           </div>
         ) : currentUserChats?.length === 0 ? (
-          <div className="flex justify-center items-center h-[calc(100vh-170px)]">
+          <div className="flex justify-center items-center h-52">
             <h1 className="text-2xl text-slate-400 dark:text-slate-500">
               No Recent chats
             </h1>
