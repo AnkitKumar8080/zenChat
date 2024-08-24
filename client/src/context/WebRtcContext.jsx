@@ -57,18 +57,18 @@ export default function WebRtcContextProvider({ children }) {
         },
       });
 
-      // if (!navigator.mediaDevices?.enumerateDevices) {
-      //   console.log("enumerate devices not supported");
-      // } else {
-      //   // list all the camera devices of user
-      //   navigator.mediaDevices.enumerateDevices().then((devices) => {
-      //     devices.forEach((device) => {
-      //       if (device.kind === "videoinput") {
-      //         console.log(device);
-      //       }
-      //     });
-      //   });
-      // }
+      if (!navigator.mediaDevices?.enumerateDevices) {
+        console.log("enumerate devices not supported");
+      } else {
+        // list all the camera devices of user
+        navigator.mediaDevices.enumerateDevices().then((devices) => {
+          devices.forEach((device) => {
+            if (device.kind === "videoinput") {
+              console.log(device);
+            }
+          });
+        });
+      }
 
       if (localVideoRef.current) {
         localVideoRef.current.srcObject = stream;
@@ -104,8 +104,11 @@ export default function WebRtcContextProvider({ children }) {
 
       // add the audio stream to the peer connection
       const audioTrack = localStreamRef.current.getAudioTracks()[0];
-      if (sender) {
-        sender.replaceTrack(audioTrack);
+      const audioSender = peerConnectionRef.current
+        .getSenders()
+        .find((s) => s.trackId === audioTrack.trackId);
+      if (audioSender) {
+        audioSender.replaceTrack(audioTrack);
       }
     }
   };
