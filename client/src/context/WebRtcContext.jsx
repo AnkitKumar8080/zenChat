@@ -57,6 +57,19 @@ export default function WebRtcContextProvider({ children }) {
         },
       });
 
+      // if (!navigator.mediaDevices?.enumerateDevices) {
+      //   console.log("enumerate devices not supported");
+      // } else {
+      //   // list all the camera devices of user
+      //   navigator.mediaDevices.enumerateDevices().then((devices) => {
+      //     devices.forEach((device) => {
+      //       if (device.kind === "videoinput") {
+      //         console.log(device);
+      //       }
+      //     });
+      //   });
+      // }
+
       if (localVideoRef.current) {
         localVideoRef.current.srcObject = stream;
         localVideoRef.current.muted = true; // mute the audio feed to the local user
@@ -87,6 +100,12 @@ export default function WebRtcContextProvider({ children }) {
         .find((s) => s.track.kind === videoTrack.kind);
       if (sender) {
         sender.replaceTrack(videoTrack);
+      }
+
+      // add the audio stream to the peer connection
+      const audioTrack = localStreamRef.current.getAudioTracks()[0];
+      if (sender) {
+        sender.replaceTrack(audioTrack);
       }
     }
   };
@@ -167,7 +186,7 @@ export default function WebRtcContextProvider({ children }) {
 
   // handle call
   const handleCall = async () => {
-    console.log("handleCall called with targetUserId:", targetUserId);
+    console.log("handling Call called with targetUserId:", targetUserId);
     if (!targetUserId) {
       return console.log("other peer id not provided");
     }
