@@ -26,9 +26,10 @@ export default function WebRtcContextProvider({ children }) {
   const [incomingOffer, setIncomingOffer] = useState(null);
   const [callConnectionState, setCallConnectionState] = useState(null); // "initiated", "connecting", "connected"
   const [showVideoComp, setShowVideoComp] = useState(false);
-
   const [isMicrophoneActive, setIsMicrophoneActive] = useState(true);
   const [isCameraActive, setIsCameraActive] = useState(true);
+  const [inputVideoDevices, setInputVideoDevices] = useState([]);
+  const [selectedInputVideoDevice, setSelectedInputVideoDevice] = useState({});
 
   // refs for webRtcContext
   const didIOffer = useRef(false); // current offer made by
@@ -44,12 +45,16 @@ export default function WebRtcContextProvider({ children }) {
   const userId = user._id;
 
   // fetch user media
-  const fetchUserMedia = async (facingMode = "user") => {
+  const fetchUserMedia = async (facingMode = "user", deviceId = null) => {
     try {
+      const videoDeviceOptions = {
+        facingMode,
+      };
+      if (deviceId) {
+        videoDeviceOptions.deviceId = deviceId;
+      }
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode,
-        },
+        video: videoDeviceOptions,
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
@@ -57,14 +62,57 @@ export default function WebRtcContextProvider({ children }) {
         },
       });
 
+      // get the video input devices id
+      if (!navigator.mediaDevices?.enumerateDevices) {
+        console.log("enumerate devices not supported");
+      } else {
+        // list all the camera devices of user
+        navigator.mediaDevices.enumerateDevices().then((devices) => {
+          const videoDevices = devices.filter(
+            (device) => device.kind === "videoinput"
+          );
+
+          setInputVideoDevices(videoDevices);
+        });
+      }
+
+      localStreamRef.current = stream;
       if (localVideoRef.current) {
         localVideoRef.current.srcObject = stream;
         localVideoRef.current.muted = true; // mute the audio feed to the local user
       }
 
-      localStreamRef.current = stream;
+      // get current selected video device id
+      if (localStreamRef.current) {
+        const currentVideoDeviceId = localStreamRef.current
+          ?.getVideoTracks()[0]
+          ?.getSettings().deviceId;
+        currentVideoDeviceId &&
+          setSelectedInputVideoDevice(currentVideoDeviceId);
+      }
     } catch (error) {
       console.log("Error while fetching userMedia..." + error);
+    }
+  };
+
+  const replaceVideoAudioTracks = () => {
+    if (peerConnectionRef.current) {
+      const videoTrack = localStreamRef.current.getVideoTracks()[0];
+      const sender = peerConnectionRef.current
+        .getSenders()
+        .find((s) => s.track.kind === videoTrack.kind);
+      if (sender) {
+        sender.replaceTrack(videoTrack);
+      }
+
+      // add the audio stream to the peer connection
+      const audioTrack = localStreamRef.current.getAudioTracks()[0];
+      const audioSender = peerConnectionRef.current
+        .getSenders()
+        .find((s) => s.trackId === audioTrack.trackId);
+      if (audioSender) {
+        audioSender.replaceTrack(audioTrack);
+      }
     }
   };
 
@@ -80,15 +128,22 @@ export default function WebRtcContextProvider({ children }) {
     await fetchUserMedia(cameraFace.current);
 
     // replace the tracks in the peer connection
-    if (peerConnectionRef.current) {
-      const videoTrack = localStreamRef.current.getVideoTracks()[0];
-      const sender = peerConnectionRef.current
-        .getSenders()
-        .find((s) => s.track.kind === videoTrack.kind);
-      if (sender) {
-        sender.replaceTrack(videoTrack);
-      }
+    replaceVideoAudioTracks();
+  };
+
+  const changeVideoInputDevice = async (deviceId) => {
+    if (!deviceId) {
+      return console.log("video input device id not provided");
     }
+
+    // stop all local media tracks
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach((track) => track.stop());
+    }
+
+    await fetchUserMedia(cameraFace.current, deviceId);
+
+    replaceVideoAudioTracks();
   };
 
   // create RTC peer connection
@@ -167,7 +222,7 @@ export default function WebRtcContextProvider({ children }) {
 
   // handle call
   const handleCall = async () => {
-    console.log("handleCall called with targetUserId:", targetUserId);
+    console.log("handling Call called with targetUserId:", targetUserId);
     if (!targetUserId) {
       return console.log("other peer id not provided");
     }
@@ -221,6 +276,7 @@ export default function WebRtcContextProvider({ children }) {
     setShowVideoComp(false);
     setIncomingOffer(null);
     audioRef.current.pause();
+    setInputVideoDevices([]);
   };
 
   // handle answer offer
@@ -337,6 +393,9 @@ export default function WebRtcContextProvider({ children }) {
         isCameraActive,
         audioRef,
         flipCamera,
+        inputVideoDevices,
+        selectedInputVideoDevice,
+        changeVideoInputDevice,
       }}
     >
       <audio ref={audioRef} src={ringtone} loop></audio>

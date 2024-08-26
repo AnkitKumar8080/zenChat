@@ -20,6 +20,7 @@ export default function SideMenu({ activeLeftSidebar, setActiveLeftSidebar }) {
         <ul className="flex flex-col gap-10 md:gap-8 md:flex-row">
           {sideMenuOptions.map(({ Icon, name }, index) => (
             <li
+              key={index}
               className={`text-3xl  cursor-pointer hover:text-primary transition-none ${
                 name === activeLeftSidebar ? "text-primary" : "text-slate-500"
               }`}

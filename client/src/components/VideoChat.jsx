@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaVideoSlash,
   BsMicMuteFill,
@@ -6,6 +6,8 @@ import {
   FaVideo,
   MdCallEnd,
   MdFlipCameraAndroid,
+  RiArrowDropDownLine,
+  RiArrowDropUpLine,
 } from "../assets";
 import { useConnectWebRtc } from "../context/WebRtcContext";
 
@@ -20,7 +22,17 @@ export default function VideoChat({ show }) {
     isCameraActive,
     isMicrophoneActive,
     flipCamera,
+    inputVideoDevices,
+    selectedInputVideoDevice,
+    changeVideoInputDevice,
   } = useConnectWebRtc();
+
+  const handleChangeVideoInput = (deviceId) => {
+    changeVideoInputDevice(deviceId);
+  };
+
+  const [showVideoOptionTray, setShowVideoOptionTray] = useState(false);
+  const isMobileDevice = window.matchMedia("(max-width: 768px)").matches;
 
   return (
     <div
@@ -35,7 +47,6 @@ export default function VideoChat({ show }) {
           className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
         ></video>
         <video
-          // autoPlay
           ref={localVideoRef}
           autoPlay
           className="absolute bottom-4 left-4 md:left-3 md:bottom-3 w-48 h-36 md:w-24 md:h-36 object-cover border-2 md:border-[1px] border-white rounded-md"
@@ -48,12 +59,48 @@ export default function VideoChat({ show }) {
           >
             {isMicrophoneActive ? <FaMicrophone /> : <BsMicMuteFill />}
           </button>
-          <button
-            onClick={handleToggleCamera}
-            className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
-          >
-            {isCameraActive ? <FaVideo /> : <FaVideoSlash />}
-          </button>
+          <div className="relative flex items-center bg-gray-700 rounded-full">
+            <div
+              className={`${
+                showVideoOptionTray && !isMobileDevice ? "" : "hidden"
+              } videoDevices absolute bottom-10`}
+            >
+              {inputVideoDevices?.length !== 0 && (
+                <ul className="bg-white px-2 py-1">
+                  {inputVideoDevices?.map((device) => (
+                    <li
+                      onClick={() => handleChangeVideoInput(device.deviceId)}
+                      className={`text-xs w-[250px] text-left cursor-pointer my-2 ${
+                        device.deviceId === selectedInputVideoDevice
+                          ? "text-blue-700"
+                          : ""
+                      }`}
+                    >
+                      {device.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div
+              onClick={() => setShowVideoOptionTray(!showVideoOptionTray)}
+              className={`${
+                isMobileDevice && "hidden"
+              } px-1 text-2xl text-white cursor-pointer`}
+            >
+              {showVideoOptionTray ? (
+                <RiArrowDropUpLine />
+              ) : (
+                <RiArrowDropDownLine />
+              )}
+            </div>
+            <button
+              onClick={handleToggleCamera}
+              className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
+            >
+              {isCameraActive ? <FaVideo /> : <FaVideoSlash />}
+            </button>
+          </div>
           <button
             onClick={flipCamera}
             className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
