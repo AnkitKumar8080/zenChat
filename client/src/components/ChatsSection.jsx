@@ -29,22 +29,21 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
   const [showMessageMenu, setShowMessageMenu] = useState(false);
   const [isOpenView, setIsOpenView] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState("");
+  const { user } = useAuth();
 
   const handleEnlargeClick = (url) => {
     setCurrentImageUrl(url);
     setIsOpenView(true);
   };
   return (
-    <div className={` w-full flex my-2 `}>
+    <div className={`w-auto flex my-2 `}>
       <div
         className={`flex  ${
-          isOwnMessage
-            ? "max-w-[50%] ml-auto mr-10 md:mr-3"
-            : "mr-auto ml-10 md:ml-3"
+          isOwnMessage ? "max-w-[50%] md:max-w-[85%] ml-auto " : "mr-auto"
         }`}
       >
         <div
-          className={`flex flex-col  justify-center relative dark:bg-opacity-20 dark:bg-primary min-w-[120px] bg-backgroundLight3  p-2 md:p-1 rounded-xl ${
+          className={`flex flex-col  justify-center relative dark:bg-opacity-20 dark:bg-primary min-w-[120px] max-w-full bg-backgroundLight3  p-2 md:p-1 rounded-xl ${
             isOwnMessage ? "rounded-br-none" : "rounded-bl-none"
           } mb-5 ${isOwnMessage ? "order-2" : "order-1"}`}
         >
@@ -57,9 +56,9 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
                       const fileExtension = file.url
                         .split("/")
                         .pop()
+                        .toLowerCase()
                         .split(".")
-                        .pop()
-                        .toLowerCase();
+                        .pop();
                       const isImage = [
                         "jpg",
                         "jpeg",
@@ -77,7 +76,7 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
                             className={`${
                               message.attachments?.length > 1
                                 ? "size-44"
-                                : "size-72"
+                                : "size-72 md:size-60"
                             } object-cover rounded-md`}
                           />
                         );
@@ -102,12 +101,12 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
                       />
                     )}
                   </div>
-                  <div className="flex justify-between items-center p-1 bg-black bg-opacity-20 rounded-sm">
+                  <div className="flex justify-between items-center mt-3 rounded-sm">
                     <div
                       className="cursor-pointer"
                       onClick={() => handleEnlargeClick(file.url)}
                     >
-                      <ImEnlarge2 />
+                      <ImEnlarge2 className="dark:text-text_light_primary" />
                     </div>
                     <div
                       className="cursor-pointer"
@@ -115,7 +114,7 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
                         saveAs(file.url, file.url.split("/").slice(-1));
                       }}
                     >
-                      <PiDownloadSimpleBold className="text-xl" />
+                      <PiDownloadSimpleBold className="text-xl dark:text-text_light_primary" />
                     </div>
                   </div>
                 </div>
@@ -124,11 +123,11 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
           ) : (
             ""
           )}
-          <p className="p-3 md:p-2 text-base md:text-md text-slate-900 dark:text-slate-100 ">
+          <p className="p-2 md:p-2 text-base md:text-md text-slate-900 dark:text-slate-100 ">
             {message.content}
           </p>
 
-          <div className="flex items-center gap-1 text-xs dark:text-slate-400 text-slate-400 absolute bottom-0 right-1 ">
+          <div className="flex items-center gap-1 text-xs text-slate-400 absolute bottom-0 right-1 ">
             {/* <span>
               <LuClock3 />
             </span> */}
@@ -163,7 +162,9 @@ const MessageCont = ({ isOwnMessage, isGroupChat, message }) => {
                   </p>
                   <p
                     onClick={() => deleteChatMessage(message._id)}
-                    className="text-red-400 hover:text-red-500"
+                    className={`text-red-400 hover:text-red-500 ${
+                      user._id !== message?.sender._id && "hidden"
+                    }`}
                   >
                     Delete
                   </p>
@@ -217,6 +218,7 @@ export default function ChatsSection() {
     }
   };
 
+  // handle call only if the target user id is available
   useEffect(() => {
     if (targetUserId) {
       handleCall();
@@ -303,7 +305,7 @@ export default function ChatsSection() {
         </div>
       </div>
 
-      <div className="chat-msg-cont relative overflow-auto px-4 md:px-0 w-full h-[calc(100vh-180px)] md:h-[calc(100vh-260px)] ">
+      <div className="chat-msg-cont relative overflow-auto px-4 md:px-2 w-full h-[calc(100vh-180px)] md:h-[calc(100vh-260px)] ">
         {loadingMessages ? (
           <div className=" h-full w-full flex items-center justify-center">
             <Loading />
@@ -359,7 +361,7 @@ export default function ChatsSection() {
           ))}
         </div>
       )}
-      <div className="h-[90px] md:h-[60px] border-t shadow-xl dark:border-slate-500 light-upper-cont-shadow dark:dark-upper-cont-shadow bg-slate w-full flex items-center justify-between p-4 md:p-2 ">
+      <div className="h-[90px] md:h-auto border-t shadow-xl dark:border-slate-500 light-upper-cont-shadow dark:dark-upper-cont-shadow bg-slate w-full flex items-center justify-between p-4 md:p-2 ">
         <div className="flex-1 mr-4 md:mr-2 ">
           <input
             type="text"

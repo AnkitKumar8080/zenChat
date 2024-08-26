@@ -17,11 +17,18 @@ export default function MyModal({ openView, setOpenView, imageUrl }) {
         className="z-40 focus:outline-none"
         onClose={close}
       >
-        <div className="fixed inset-0 flex items-center justify-center  z-10 w-screen h-full overflow-y-auto bg-black bg-opacity-30">
-          <div className="relative w-[900px]">
-            <img src={imageUrl} alt={imageUrl} />
+        <div
+          onClick={close}
+          className="fixed inset-0 flex items-center justify-center  z-10 w-screen h-full overflow-y-auto bg-black bg-opacity-75"
+        >
+          <div className="relative">
+            <img
+              className="w-full h-auto max-h-[80vh] object-contain rounded-md"
+              src={imageUrl}
+              alt="Preview"
+            />
             <div
-              className="absolute bg-white bg-opacity-30 rounded-md z-50 top-0 right-0 text-2xl text-red-500 cursor-pointer"
+              className="absolute bg-white bg-opacity-30 rounded-md z-50 -top-7 right-1 text-2xl text-red-500 cursor-pointer"
               onClick={close}
             >
               <IoClose />

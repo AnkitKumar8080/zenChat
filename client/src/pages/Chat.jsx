@@ -20,37 +20,42 @@ export default function Chat() {
   const { showVideoComp, incomingOffer } = useConnectWebRtc();
 
   return (
-    <div className="h-full w-full ">
-      <AddChat open={true} />
-      {!!incomingOffer && (
-        <IncomingCall incomingOffer={incomingOffer} active={!!incomingOffer} />
-      )}
-
-      <VideoChat show={showVideoComp} />
-      <div className="w-full h-screen md:h-[100%] flex dark:bg-backgroundDark3 relative">
-        <div className="h-full md:h-fit md:absolute md:bottom-0 md:w-full md:hidden">
-          <SideMenu
-            setActiveLeftSidebar={setActiveLeftSidebar}
-            activeLeftSidebar={activeLeftSidebar}
+    <>
+      <div className="h-full w-full ">
+        <AddChat open={true} />
+        {!!incomingOffer && (
+          <IncomingCall
+            incomingOffer={incomingOffer}
+            active={!!incomingOffer}
           />
-        </div>
-        <div>
-          <ChatLeftSidebar activeLeftSidebar={activeLeftSidebar} />
-        </div>
-        <div
-          className={`w-full md:${
-            isChatSelected && activeLeftSidebar === "recentChats"
-              ? "block"
-              : "hidden"
-          }`}
-        >
-          {currentSelectedChat.current?._id ? (
-            <ChatsSection />
-          ) : (
-            <div className="h-full w-full flex items-center justify-center text-2xl text-slate-500">
-              <h1>No chat selected</h1>
-            </div>
-          )}
+        )}
+
+        <VideoChat show={showVideoComp} />
+        <div className="w-full h-screen md:h-[calc(100vh-120px)] flex dark:bg-backgroundDark3 relative">
+          <div className="h-full md:h-fit md:absolute md:bottom-0 md:w-full md:hidden">
+            <SideMenu
+              setActiveLeftSidebar={setActiveLeftSidebar}
+              activeLeftSidebar={activeLeftSidebar}
+            />
+          </div>
+          <div>
+            <ChatLeftSidebar activeLeftSidebar={activeLeftSidebar} />
+          </div>
+          <div
+            className={`w-full md:${
+              isChatSelected && activeLeftSidebar === "recentChats"
+                ? ""
+                : "hidden"
+            }`}
+          >
+            {currentSelectedChat.current?._id ? (
+              <ChatsSection />
+            ) : (
+              <div className="h-full w-full flex items-center justify-center text-2xl text-slate-500">
+                <h1>No chat selected</h1>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className="hidden md:block ">
@@ -59,6 +64,6 @@ export default function Chat() {
           activeLeftSidebar={activeLeftSidebar}
         />
       </div>
-    </div>
+    </>
   );
 }

@@ -16,17 +16,21 @@ const storage = multer.diskStorage({
       );
     }
 
+    console.log(file);
+
     // filename without extension
     const filenameWithoutExtension = file.originalname
-      .toLowerCase()
       .split(" ")
       .join("-")
-      ?.split(".")[0];
+      .split(".")
+      .slice(0, -1)
+      .join(".");
+
     cb(
       null,
       filenameWithoutExtension +
         Date.now() +
-        Math.ceil(Math.random() * 1e5) +
+        Math.ceil(Math.random() * 1e3) +
         fileExtension
     );
   },

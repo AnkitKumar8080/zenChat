@@ -22,7 +22,7 @@ export default function ChatLeftSidebar({ activeLeftSidebar }) {
   };
 
   return (
-    <div className="w-[380px] md:w-full md:h-[calc(100vh-130px)] h-full bg-backgroundLight2 dark:bg-backgroundDark2 border-r-2 dark:border-none">
+    <div className="w-[380px] md:w-full md:h-[calc(100vh-120px)] h-full bg-backgroundLight2 dark:bg-backgroundDark2 border-r-2 dark:border-none">
       {renderLeftSidebar()}
     </div>
   );

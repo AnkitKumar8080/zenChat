@@ -49,10 +49,10 @@ export default function VideoChat({ show }) {
         <video
           ref={localVideoRef}
           autoPlay
-          className="absolute bottom-4 left-4 md:left-3 md:bottom-3 w-48 h-36 md:w-24 md:h-36 object-cover border-2 md:border-[1px] border-white rounded-md"
+          className="absolute bottom-4 left-4 md:left-3 md:bottom-4 w-48 h-36 md:w-16 md:h-24 object-cover border-2 md:border-[1px] border-white rounded-md"
         ></video>
 
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-4">
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-4 p-2">
           <button
             onClick={handleToggleMicrophone}
             className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
