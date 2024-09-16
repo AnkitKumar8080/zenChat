@@ -15,7 +15,7 @@ pipeline {
     }
 
     // Check for changes in the backend directory; if found, build it, else skip the build 
-    stage('Checking for changes in backend directory') {
+    stage('Checking for changes in the backend directory') {
       steps {
         script {
           def changes = sh(script: 'git diff --name-only HEAD HEAD~1', returnStdout: true).trim()
