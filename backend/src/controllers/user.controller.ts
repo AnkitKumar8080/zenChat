@@ -31,7 +31,7 @@ const signUp = asyncHandler(async (req: Request, res: Response) => {
       username,
       email,
       password: hashedPassword,
-      avatarUrl: `https://s3bucket.bytebreeze.xyz/staticbucketstorage/public/images/avatar${
+      avatarUrl: `https://s3bucket.bytenode.xyz/staticbucketstorage/public/images/avatar${
         // random number between 0 and 40
         Math.floor(Math.random() * (40 - 1 + 1)) + 1
       }.avif`,

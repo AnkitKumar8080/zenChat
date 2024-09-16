@@ -58,7 +58,7 @@ pipeline {
             NODE_ENV=development
             PORT=5000
             CORS_URL=https://zenchat-indol.vercel.app
-            SERVER_URL=https://zenchatapi.bytebreeze.xyz
+            SERVER_URL=https://zenchatapi.bytenode.xyz
             DB_URL=${DB_URL}
             DB_NAME=ZenChat
             DB_MIN_POOL_SIZE=2
