@@ -8,6 +8,7 @@ This is a full-featured chat and video call application built using the MERN sta
 
 ## Features
 
+- **One-to-One video chat:** you can make video call between two users.
 - **One-to-One Chat:** Private messaging between two users.
 - **Group Chat:** Messaging within a group of users.
 - **Media Sharing:** Share images, files, and text messages.
@@ -32,6 +33,7 @@ This is a full-featured chat and video call application built using the MERN sta
 - **Express.js:** For the server framework.
 - **MongoDB:** For the database.
 - **Socket.IO:** For real-time bidirectional communication.
+- **WebRTC:** For peer-to-peer data exchange.
 
 ## Installation
 
