@@ -29,7 +29,9 @@ export default function WebRtcContextProvider({ children }) {
   const [isMicrophoneActive, setIsMicrophoneActive] = useState(true);
   const [isCameraActive, setIsCameraActive] = useState(true);
   const [inputVideoDevices, setInputVideoDevices] = useState([]);
-  const [selectedInputVideoDevice, setSelectedInputVideoDevice] = useState({});
+  const [inputAudioDevices, setInputAudioDevices] = useState([]);
+  const [selectedInputVideoDevice, setSelectedInputVideoDevice] = useState();
+  const [selectedInputAudioDevice, setSelectedInputAudioDevice] = useState();
 
   // refs for webRtcContext
   const didIOffer = useRef(false); // current offer made by
@@ -45,21 +47,32 @@ export default function WebRtcContextProvider({ children }) {
   const userId = user._id;
 
   // fetch user media
-  const fetchUserMedia = async (facingMode = "user", deviceId = null) => {
+  const fetchUserMedia = async (
+    facingMode = "user",
+    videoDeviceId = null,
+    audioDeviceId = null
+  ) => {
     try {
       const videoDeviceOptions = {
         facingMode,
       };
-      if (deviceId) {
-        videoDeviceOptions.deviceId = deviceId;
+
+      const audioDeviceOptions = {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+      };
+      if (videoDeviceId) {
+        videoDeviceOptions.deviceId = videoDeviceId;
       }
+
+      if (audioDeviceId) {
+        audioDeviceOptions.deviceId = audioDeviceId;
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({
         video: videoDeviceOptions,
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: true,
-        },
+        audio: audioDeviceOptions,
       });
 
       // get the video input devices id
@@ -72,7 +85,13 @@ export default function WebRtcContextProvider({ children }) {
             (device) => device.kind === "videoinput"
           );
 
+          const audioDevices = devices.filter(
+            (device) => device.kind === "audioinput"
+          );
+
           setInputVideoDevices(videoDevices);
+          setInputAudioDevices(audioDevices);
+          console.log(audioDevices);
         });
       }
 
@@ -87,8 +106,15 @@ export default function WebRtcContextProvider({ children }) {
         const currentVideoDeviceId = localStreamRef.current
           ?.getVideoTracks()[0]
           ?.getSettings().deviceId;
+
+        const currentAudioDeviceId = localStreamRef.current
+          ?.getAudioTracks()[0]
+          ?.getSettings().deviceId;
         currentVideoDeviceId &&
           setSelectedInputVideoDevice(currentVideoDeviceId);
+
+        currentAudioDeviceId &&
+          setSelectedInputAudioDevice(currentAudioDeviceId);
       }
     } catch (error) {
       console.log("Error while fetching userMedia..." + error);
@@ -131,8 +157,8 @@ export default function WebRtcContextProvider({ children }) {
     replaceVideoAudioTracks();
   };
 
-  const changeVideoInputDevice = async (deviceId) => {
-    if (!deviceId) {
+  const changeVideoInputDevice = async (videoDeviceId) => {
+    if (!videoDeviceId) {
       return console.log("video input device id not provided");
     }
 
@@ -141,7 +167,22 @@ export default function WebRtcContextProvider({ children }) {
       localStreamRef.current.getTracks().forEach((track) => track.stop());
     }
 
-    await fetchUserMedia(cameraFace.current, deviceId);
+    await fetchUserMedia(cameraFace.current, videoDeviceId);
+
+    replaceVideoAudioTracks();
+  };
+
+  const changeAudioInputDevice = async (audioDeviceId) => {
+    if (!audioDeviceId) {
+      return console.log("audio input device id not provided");
+    }
+
+    // stop all local media tracks
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach((track) => track.stop());
+    }
+
+    await fetchUserMedia(cameraFace.current, null, audioDeviceId);
 
     replaceVideoAudioTracks();
   };
@@ -394,8 +435,11 @@ export default function WebRtcContextProvider({ children }) {
         audioRef,
         flipCamera,
         inputVideoDevices,
+        inputAudioDevices,
         selectedInputVideoDevice,
+        selectedInputAudioDevice,
         changeVideoInputDevice,
+        changeAudioInputDevice,
       }}
     >
       <audio ref={audioRef} src={ringtone} loop></audio>

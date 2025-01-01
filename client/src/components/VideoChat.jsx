@@ -25,13 +25,21 @@ export default function VideoChat({ show }) {
     inputVideoDevices,
     selectedInputVideoDevice,
     changeVideoInputDevice,
+    inputAudioDevices,
+    selectedInputAudioDevice,
+    changeAudioInputDevice,
   } = useConnectWebRtc();
 
   const handleChangeVideoInput = (deviceId) => {
     changeVideoInputDevice(deviceId);
   };
 
+  const handleChangeAudioInput = (deviceId) => {
+    changeAudioInputDevice(deviceId);
+  };
+
   const [showVideoOptionTray, setShowVideoOptionTray] = useState(false);
+  const [showAudioOptionTray, setShowAudioOptionTray] = useState(false);
   const isMobileDevice = window.matchMedia("(max-width: 768px)").matches;
 
   return (
@@ -53,12 +61,48 @@ export default function VideoChat({ show }) {
         ></video>
 
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-4 p-2">
-          <button
-            onClick={handleToggleMicrophone}
-            className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
-          >
-            {isMicrophoneActive ? <FaMicrophone /> : <BsMicMuteFill />}
-          </button>
+          <div className="relative flex items-center bg-gray-700 rounded-full">
+            <div
+              className={`${
+                showAudioOptionTray && !isMobileDevice ? "" : "hidden"
+              } videoDevices absolute bottom-10`}
+            >
+              {inputAudioDevices?.length !== 0 && (
+                <ul className="bg-white px-2 py-1">
+                  {inputAudioDevices?.map((device) => (
+                    <li
+                      onClick={() => handleChangeAudioInput(device.deviceId)}
+                      className={`text-xs w-[250px] text-left cursor-pointer my-2 ${
+                        device.deviceId === selectedInputAudioDevice
+                          ? "text-blue-700"
+                          : ""
+                      }`}
+                    >
+                      {device.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div
+              onClick={() => setShowAudioOptionTray(!showAudioOptionTray)}
+              className={`${
+                isMobileDevice && "hidden"
+              } px-1 text-2xl text-white cursor-pointer`}
+            >
+              {showAudioOptionTray ? (
+                <RiArrowDropUpLine />
+              ) : (
+                <RiArrowDropDownLine />
+              )}
+            </div>
+            <button
+              onClick={handleToggleMicrophone}
+              className="p-2 bg-white bg-opacity-40 rounded-full text-white hover:bg-opacity-50"
+            >
+              {isMicrophoneActive ? <FaMicrophone /> : <BsMicMuteFill />}
+            </button>
+          </div>
           <div className="relative flex items-center bg-gray-700 rounded-full">
             <div
               className={`${
